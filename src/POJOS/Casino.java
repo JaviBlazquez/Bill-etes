@@ -4,6 +4,7 @@ package POJOS;
 public class Casino {
 	
 	int a;
-	String name;
+	String name;ç
+	///testing
 
 }
