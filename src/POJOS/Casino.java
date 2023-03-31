@@ -5,6 +5,7 @@ public class Casino {
  branch 'master' of https://github.com/JaviBlazquez/Bill-etes.git
 	String name;
 	///testing
-///HOLA SE ME ESCUCHA?
+ ///HOLA SE ME ESCUCHA?
  /// CUANDO TE SALEN LAS FLEACHAS?NOMENETERO
+ //ALEX NO BORRES ESTO
 }
