@@ -1,8 +1,9 @@
+
 package POJOS;
 
 public class Casino {
 	
-	
-	String name;//a
+	int a;
+	String name;
 
 }
