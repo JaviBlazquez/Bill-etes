@@ -3,6 +3,6 @@ package POJOS;
 public class Casino {
 	
 	
-	String name;
+	String name;//a
 
 }
