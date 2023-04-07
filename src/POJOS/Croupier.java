@@ -1,10 +1,12 @@
 package POJOS;
 
-public class Croupier {
+public class Croupier extends Worker{
 	private int croupierId;
 
-	public Croupier(int croupierId) {
-		super();
+	
+
+	public Croupier(int casinoId, String name, String surname, float salary, String addres, int croupierId) {
+		super(casinoId, name, surname, salary, addres);
 		this.croupierId = croupierId;
 	}
 

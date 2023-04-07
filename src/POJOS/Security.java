@@ -1,13 +1,14 @@
 package POJOS;
 
-public class Security {
+public class Security extends Worker{
 	private int securityId;
 
-	public Security(int securityId) {
-		super();
+	
+	public Security(int casinoId, String name, String surname, float salary, String addres, int securityId) {
+		super(casinoId, name, surname, salary, addres);
 		this.securityId = securityId;
 	}
-	
+
 	public int getSecurityId() {
 		return securityId;
 	}
