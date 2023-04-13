@@ -6,4 +6,5 @@
  *
  */
 module Billetes {
+	requires java.sql;
 }
