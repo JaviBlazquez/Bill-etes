@@ -7,9 +7,10 @@ public interface BancaryAccountManager {
 	public void addBancaryAccount(BancaryAccount BA);
 	
 	//Get the bancary account
-	public BancaryAccountManager getBancaryAccount();
+	public BancaryAccount getBancaryAccount();
 	
 	//Updates the bancary account to new values
 	public void updateBancaryAccount(BancaryAccount BA);
+	
 	
 }

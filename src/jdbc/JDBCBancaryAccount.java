@@ -26,11 +26,18 @@ public class JDBCBancaryAccount implements BancaryAccountManager{
 	@Override
 	public void updateBancaryAccount(BancaryAccount BA) {
 		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "UPDATE bancaryaccount SET money = {?}";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setFloat(1, BA.getMoney());
+			prep.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public BancaryAccountManager getBancaryAccount() {
+	public BancaryAccount getBancaryAccount() {
 		// TODO Auto-generated method stub
 		return null;
 	}
