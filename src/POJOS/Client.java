@@ -16,7 +16,43 @@ public class Client {
 		this.surname = surname;
 		this.condition = condition;
 	}
-	
+	public int getClientId() {
+		return clientId;
+	}
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
+	}
+	public int getPhone() {
+		return phone;
+	}
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+	public float getMoney() {
+		return money;
+	}
+	public void setMoney(float money) {
+		this.money = money;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSurname() {
+		return surname;
+	}
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+	public boolean isCondition() {
+		return condition;
+	}
+	public void setCondition(boolean condition) {
+		this.condition = condition;
+	}
+		
 	
 	
 }
