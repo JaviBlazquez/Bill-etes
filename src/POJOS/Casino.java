@@ -10,4 +10,22 @@ public class Casino {
 		this.casinoId = casinoId;
 		this.accountId = accountId;
 	}
+
+	public int getCasinoId() {
+		return casinoId;
+	}
+
+	public void setCasinoId(int casinoId) {
+		this.casinoId = casinoId;
+	}
+
+	public int getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
+	}
+	
+	
 }
