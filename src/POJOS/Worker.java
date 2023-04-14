@@ -1,18 +1,28 @@
 package POJOS;
 
 public class Worker {
+	private int workerId;
 	private int casinoId;
 	private String name;
 	private String surname;
 	private float salary;
 	private String addres;
-	public Worker(int casinoId, String name, String surname, float salary, String addres) {
+	private Occupation occupation;
+	public Worker(int workerId, int casinoId, String name, String surname, float salary, String addres, Occupation occupation) {
 		super();
+		this.workerId = workerId;
 		this.casinoId = casinoId;
 		this.name = name;
 		this.surname = surname;
 		this.salary = salary;
 		this.addres = addres;
+		this.occupation=occupation;
+	}
+	public int getWorkerId() {
+		return workerId;
+	}
+	public void setWorkerId(int workerId) {
+		this.workerId=workerId;
 	}
 	public int getCasinoId() {
 		return casinoId;
@@ -43,5 +53,11 @@ public class Worker {
 	}
 	public void setAddres(String addres) {
 		this.addres = addres;
+	}
+	public Occupation getOccupation() {
+		return this.occupation;
+	}
+	public void setOccupation(Occupation occupation) {
+		this.occupation=occupation;
 	}
 }
