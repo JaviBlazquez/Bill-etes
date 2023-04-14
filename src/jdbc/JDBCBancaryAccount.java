@@ -11,7 +11,7 @@ public class JDBCBancaryAccount implements BancaryAccountManager{
 	}
 	
 	public void addBancaryAccount(BancaryAccount BA) {
-		// TODO Auto-generated method stub
+		
 		try {
 			String sql = "INSERT INTO bancaryaccount (account_id,money) VALUES(?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
@@ -25,7 +25,7 @@ public class JDBCBancaryAccount implements BancaryAccountManager{
 
 	@Override
 	public void updateBancaryAccount(BancaryAccount BA) {
-		// TODO Auto-generated method stub
+		
 		try {
 			String sql = "UPDATE bancaryaccount SET money = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
@@ -38,7 +38,7 @@ public class JDBCBancaryAccount implements BancaryAccountManager{
 
 	@Override
 	public BancaryAccount getBancaryAccount() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 }
