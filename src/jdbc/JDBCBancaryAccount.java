@@ -27,9 +27,11 @@ public class JDBCBancaryAccount implements BancaryAccountManager{
 	public void updateBancaryAccount(BancaryAccount BA) {
 		
 		try {
-			String sql = "UPDATE bancaryaccount SET money = {?}";
+			String sql = "UPDATE bancaryaccount SET money = {?}"
+					+ "WHERE bancaryaccount.account_id = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setFloat(1, BA.getMoney());
+			prep.setInt(2, BA.getAccountId());
 			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
