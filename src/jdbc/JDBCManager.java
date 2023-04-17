@@ -94,36 +94,15 @@ public class JDBCManager {
 				+ "  PRIMARY KEY(casino_id)"
 				+ ");";
 		stmt.executeUpdate(sql);
-		sql = "CREATE TABLE administrator("
-				+ "  admin_id INTEGER AUTOINCREMENT,"
+		sql = "CREATE TABLE worker("
+				+ "  worker_id INTEGER AUTOINCREMENT,"
 				+ "  name TEXT,"
 				+ "  surname TEXT,"
 				+ "  salary REAL,"
 				+ "  address TEXT,"
+				+ "  occupation TEXT,"
 				+ "  casino_id INTEGER,"
-				+ "  PRIMARY KEY (admin_id),"
-				+ "  FOREIGN KEY (casino_id) REFERENCES casino (casino_id)"
-				+ ");";
-		stmt.executeUpdate(sql);
-		sql = "CREATE TABLE security("
-				+ "  security_id INTEGER AUTOINCREMENT,"
-				+ "  name TEXT,"
-				+ "  surname TEXT,"
-				+ "  salary REAL,"
-				+ "  address TEXT,"
-				+ "  casino_id INTEGER,"
-				+ "  PRIMARY KEY (security_id),"
-				+ "  FOREIGN KEY (casino_id) REFERENCES casino (casino_id)"
-				+ ");";
-		stmt.executeUpdate(sql);
-		sql = "CREATE TABLE croupier("
-				+ "  croupier_id INTEGER AUTOINCREMENT,"
-				+ "  name TEXT,"
-				+ "  surname TEXT,"
-				+ "  salary REAL,"
-				+ "  address TEXT,"
-				+ "  casino_id INTEGER,"
-				+ "  PRIMARY KEY (croupier_id),"
+				+ "  PRIMARY KEY (worker_id),"
 				+ "  FOREIGN KEY (casino_id) REFERENCES casino (casino_id)"
 				+ ");";
 		stmt.executeUpdate(sql);

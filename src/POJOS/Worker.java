@@ -57,6 +57,19 @@ public class Worker {
 	public Occupation getOccupation() {
 		return this.occupation;
 	}
+	public String getOccupationString() {
+		switch(this.occupation) {
+			case SECURITY:{
+				return "Security";
+			}
+			case CROUPIER:{
+				return "Croupier";
+			}
+			default:{
+				return "Administration";
+			}
+		}
+	}
 	public void setOccupation(Occupation occupation) {
 		this.occupation=occupation;
 	}
