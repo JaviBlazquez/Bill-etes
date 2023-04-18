@@ -2,6 +2,9 @@ package jdbc;
 import POJOS.Machine;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.LinkedList;
+import java.util.List;
 
 import Interfaces.MachineManager;
 
@@ -54,17 +57,26 @@ public class JDBCMachine implements MachineManager{
 	}
 
 	@Override
-	public void getMachineFromId(Machine M) {
+	public List<Machine> getListofMachine() {
+		List<Machine> machineList = new LinkedList<Machine>();
 		try {
-			String sql = "SELECT machine_id,name,money_won"
-					+ "WHERE machine_id = {?}"
-					+ "FROM machine";
+			String sql = "SELECT * FROM machine";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setInt(1, M.getMachineId());
+			ResultSet rs= prep.executeQuery();
+			while(rs.next()) {
+				int machineId = rs.getInt("machine_id");
+				String name = rs.getString("name");
+				float money_won = rs.getFloat("money_won");
+				Machine M= new Machine(machineId,name,money_won);
+				machineList.add(M);
+			}
+			return machineList;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		return machineList;
 	}
+	
 
 	@Override
 	public Machine getMachine() {

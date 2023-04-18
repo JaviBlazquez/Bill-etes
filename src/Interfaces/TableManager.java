@@ -1,4 +1,6 @@
 package Interfaces;
+import java.util.List;
+
 import POJOS.Table;
 
 public interface TableManager {
@@ -16,6 +18,6 @@ public interface TableManager {
 	public void removeTable(Table T);
 	
 	//Get a table from Id
-	public void getTableFromId(Table T);
+	public List<Table> getListofTable();
 	
 }
