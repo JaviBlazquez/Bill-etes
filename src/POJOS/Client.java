@@ -52,6 +52,11 @@ public class Client {
 	public void setCondition(boolean condition) {
 		this.condition = condition;
 	}
+	@Override
+	public String toString() {
+		return "Client [clientId=" + clientId + ", phone=" + phone + ", money=" + money + ", name=" + name
+				+ ", surname=" + surname + ", condition=" + condition + "]";
+	}
 		
 	
 	

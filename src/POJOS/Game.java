@@ -33,6 +33,11 @@ public class Game {
 	public void setTimeStamp(int timeStamp) {
 		this.timeStamp = timeStamp;
 	}
+
+	@Override
+	public String toString() {
+		return "Game [clientId=" + clientId + ", machineId=" + machineId + ", timeStamp=" + timeStamp + "]";
+	}
 	
 	
 }

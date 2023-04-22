@@ -3,6 +3,8 @@ package POJOS;
 
 public class Casino {
 	
+	
+
 	private int casinoId;
 	private int accountId;
 	
@@ -27,5 +29,8 @@ public class Casino {
 		this.accountId = accountId;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Casino [casinoId=" + casinoId + ", accountId=" + accountId + "]";
+	}
 }

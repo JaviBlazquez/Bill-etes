@@ -29,6 +29,10 @@ public class Table {
 	public void setMoneyWon(float moneyWon) {
 		this.moneyWon = moneyWon;
 	}
+	@Override
+	public String toString() {
+		return "Table [tableId=" + tableId + ", gameName=" + gameName + ", moneyWon=" + moneyWon + "]";
+	}
 	
 	
 }

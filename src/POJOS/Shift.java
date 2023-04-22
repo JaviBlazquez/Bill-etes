@@ -33,6 +33,11 @@ public class Shift {
 	public void setTimeStamp(int timeStamp) {
 		this.timeStamp = timeStamp;
 	}
+
+	@Override
+	public String toString() {
+		return "Shift [tableId=" + tableId + ", croupierId=" + croupierId + ", timeStamp=" + timeStamp + "]";
+	}
 	
 	
 }

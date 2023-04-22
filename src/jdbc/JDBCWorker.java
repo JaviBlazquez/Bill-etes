@@ -98,5 +98,10 @@ public class JDBCWorker implements WorkerManager{
 		}
 		
 	}
+	
+	public Worker getWorker() {
+		
+		return null;
+	}
 
 }
