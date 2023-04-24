@@ -8,11 +8,10 @@ import java.util.List;
 import Interfaces.CasinoManager;
 import POJOS.Casino;
 import POJOS.Client;
-/*private int casinoId;
-	private int accountId;*/
+
 public class JDBCCasino implements CasinoManager{
 	private JDBCManager manager;
-	public JDBCasino(JDBCManager m) {
+	public JDBCCasino(JDBCManager m) {
 		this.manager = m;
 	}
 	public void addCasino(Casino C) {
@@ -66,7 +65,8 @@ public class JDBCCasino implements CasinoManager{
 		}
 		return casinoList;
 	}
-	public Client getClient() {
+	public Casino getCasino() {
 		
 		return null;
 }
+	}
