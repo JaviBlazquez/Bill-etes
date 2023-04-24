@@ -4,57 +4,57 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-import POJOS.Game;
+import POJOS.Match;
 
-public class JDBCGame implements GameManager{
+public class JDBCMatch {
+
 	private JDBCManager manager;
-	public JDBCGame(JDBCManager m) {
+	public JDBCMatch(JDBCManager m) {
 		this.manager = m;
 	}
 
-	@Override
-	public void addGame(Game g) {
+
+	public void addMatch(Match m) {
 
 		try {
-			String sql = "INSERT INTO game (clientId, machineId, timeStamp) VALUES(?,?,?)";
+			String sql = "INSERT INTO match (clientId, tableId, timeStamp) VALUES(?,?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setInt(1, g.getClientId());
-			prep.setInt(2,g.getMachineId());
-			prep.setInt(3, g.getTimeStamp());
+			prep.setInt(1, m.getClientId());
+			prep.setInt(2,m.getTableId());
+			prep.setInt(3, m.getTimeStamp());
 			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	@Override
-	public List<Game> getListOfGames() {
-		List<Game> gameList = new LinkedList<Game>();
+	public List<Match> getListOfMatches() {
+		List<Match> matchList = new LinkedList<Match>();
 		try {
-			String sql = "SELECT * FROM Game";
+			String sql = "SELECT * FROM Match";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while(rs.next()) {
-				int gameId = rs.getInt("gameID");
+				int tableId = rs.getInt("tableID");
 				int clientId = rs.getInt("clientID");
 				int timeStamp = rs.getInt("timeStamp");
 				
 			}
-			return gameList;
+			return matchList;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return gameList;
+		return matchList;
 	}
 	
 	
-	@Override
-	public void removeGame(Game g) {
+
+	public void removeMatch(Match m) {
 		try {
-			String sql = "DELETE FROM game"
-					+ "WHERE game.gameId = {?}";
+			String sql = "DELETE FROM match"
+					+ "WHERE table.tableId = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setInt(1, g.getMachineId());
+			prep.setInt(1, m.getTableId());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -62,25 +62,26 @@ public class JDBCGame implements GameManager{
 	}
 
 	
-	@Override
-	public void updateGame(Game g) {
+
+	public void updateMatch(Match m) {
 		try {
-			String sql = "UPDATE game SET clientId, machineId, timeStamp = {?,?,?}"
+			String sql = "UPDATE game SET clientId, tableId, timeStamp = {?,?,?}"
 					+ "WHERE game.gameId = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setInt(1, g.getClientId());
-			prep.setInt(2, g.getMachineId());
-			prep.setInt(3, g.getTimeStamp());
+			prep.setInt(1, m.getClientId());
+			prep.setInt(2, m.getTableId());
+			prep.setInt(3, m.getTimeStamp());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
 
-	@Override
-	public Game getGame() {
+	public Match getMatch() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 }
+
+
