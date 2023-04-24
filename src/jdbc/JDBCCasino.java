@@ -7,7 +7,6 @@ import java.util.List;
 
 import Interfaces.CasinoManager;
 import POJOS.Casino;
-import POJOS.Client;
 
 public class JDBCCasino implements CasinoManager{
 	private JDBCManager manager;
