@@ -2,6 +2,7 @@ package jdbc;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -97,6 +98,70 @@ public class JDBCWorker implements WorkerManager{
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public List<Worker> getWorkerByQuery(String query){
+		List<Worker> workerList= new LinkedList<Worker>();
+		try {
+			PreparedStatement prep = manager.getConnection().prepareStatement(query);
+			ResultSet rs= prep.executeQuery();
+			ResultSetMetaData rsmeta= rs.getMetaData();
+			Integer workerId=null;
+			Integer casinoId=null;
+			String name=null;
+			String surname=null;
+			Float salary=null;
+			String addres=null;
+			Occupation occupation=null;
+			int totalColumnas= rsmeta.getColumnCount();
+			while(rs.next()) {
+				for(int i=1; i<=totalColumnas; i++) {
+					switch(rsmeta.getColumnName(i)) {
+						case "worker_id":{
+							workerId= rs.getInt(i);
+							break;
+						}
+						case "casino_id":{
+							casinoId= rs.getInt(i);
+							break;
+						}
+						case "name":{
+							name= rs.getString(i);
+							break;
+						}
+						case "surname":{
+							surname= rs.getString(i);
+							break;
+						}
+						case "salary":{
+							salary= rs.getFloat(i);
+							break;
+						}
+						case "addres":{
+							addres= rs.getString(i);
+							break;
+						}
+						case "occupation":{
+							switch(rs.getString("occupation")) {
+								case "Security":{
+									occupation= Occupation.SECURITY;
+								}
+								case "Croupier":{
+									occupation= Occupation.CROUPIER;
+								}
+								default:{
+									occupation= Occupation.ADMINISTRATION;
+								}
+							}
+						}
+					}
+				}
+				workerList.add(new Worker(workerId, casinoId, name, surname, salary, addres, occupation));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return workerList;
 	}
 
 }
