@@ -9,5 +9,6 @@ public interface WorkerManager {
 	public List<Worker> getListOfWorkers();
 	public void updateWorker(Worker w);
 	public void removeWorker(Worker w);
+
 	public Worker getWorker();
 }
