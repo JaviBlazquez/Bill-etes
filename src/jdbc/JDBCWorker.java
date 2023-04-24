@@ -100,6 +100,7 @@ public class JDBCWorker implements WorkerManager{
 		
 	}
 	
+
 	public List<Worker> getWorkerByQuery(String query){
 		List<Worker> workerList= new LinkedList<Worker>();
 		try {
@@ -162,6 +163,11 @@ public class JDBCWorker implements WorkerManager{
 			e.printStackTrace();
 		}
 		return workerList;
+	}
+	
+	public Worker getWorker() {
+		
+		return null;
 	}
 
 }

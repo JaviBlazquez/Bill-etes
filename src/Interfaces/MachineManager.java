@@ -1,4 +1,6 @@
 package Interfaces;
+import java.util.List;
+
 import POJOS.Machine;
 
 public interface MachineManager {
@@ -13,7 +15,7 @@ public interface MachineManager {
 	public void updateMachine(Machine M);
 	
 	//gets a machine from its id
-	public void getMachineFromId(Machine M);
+	public List<Machine> getListofMachine();
 	
 	//returns an existing machine
 	public Machine getMachine();

@@ -31,6 +31,11 @@ public class Machine {
 	public void setMoneyWon(float moneyWon) {
 		this.moneyWon = moneyWon;
 	}
+
+	@Override
+	public String toString() {
+		return "Machine [machineId=" + machineId + ", machineName=" + machineName + ", moneyWon=" + moneyWon + "]";
+	}
 	
 	
 }

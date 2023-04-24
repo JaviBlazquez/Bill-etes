@@ -73,4 +73,10 @@ public class Worker {
 	public void setOccupation(Occupation occupation) {
 		this.occupation=occupation;
 	}
+	@Override
+	public String toString() {
+		return "Worker [workerId=" + workerId + ", casinoId=" + casinoId + ", name=" + name + ", surname=" + surname
+				+ ", salary=" + salary + ", addres=" + addres + ", occupation=" + occupation + "]";
+	}
+	
 }

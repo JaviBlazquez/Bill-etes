@@ -1,5 +1,9 @@
 package jdbc;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.LinkedList;
+import java.util.List;
+
 import Interfaces.TableManager;
 import POJOS.Table;
 
@@ -58,16 +62,23 @@ public class JDBCTable implements TableManager{
 		}
 	}
 
-	@Override
-	public void getTableFromId(Table T) {
+	public List<Table> getListofTable() {
+		List<Table> tableList = new LinkedList<Table>();
 		try {
-			String sql = "SELECT table_id,game_name,money_won"
-					+ "WHERE table_id = {?}"
-					+ "FROM casinotable";
+			String sql = "SELECT * FROM casinotable";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setInt(1, T.getTableId());
+			ResultSet rs= prep.executeQuery();
+			while(rs.next()) {
+				int tableId = rs.getInt("table_id");
+				String gameName = rs.getString("game_name");
+				float money_won = rs.getFloat("money_won");
+				Table T= new Table(tableId,gameName,money_won);
+				tableList.add(T);
+			}
+			return tableList;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		return tableList;
 	}
 }

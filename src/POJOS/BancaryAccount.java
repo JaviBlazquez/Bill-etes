@@ -16,6 +16,11 @@ public class BancaryAccount {
 	public void setMoney(float money) {
 		this.money = money;
 	}
+	@Override
+	public String toString() {
+		return "BancaryAccount [money=" + money + ", accountId=" + accountId + "]";
+	}
+
 	public int getAccountId() {
 		return accountId;
 	}

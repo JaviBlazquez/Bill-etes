@@ -36,6 +36,11 @@ public class Match {
 	public void setTimeStamp(int timeStamp) {
 		this.timeStamp = timeStamp;
 	}
+
+	@Override
+	public String toString() {
+		return "Match [clientId=" + clientId + ", tableId=" + tableId + ", timeStamp=" + timeStamp + "]";
+	}
 	
 	
 	
