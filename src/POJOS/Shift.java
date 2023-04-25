@@ -1,7 +1,13 @@
 package POJOS;
 
-public class Shift {
+import java.io.Serializable;
 
+public class Shift implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1385339185760201333L;
 	private int tableId;
 	private int croupierId;
 	private int timeStamp;

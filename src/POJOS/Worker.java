@@ -1,6 +1,12 @@
 package POJOS;
 
-public class Worker {
+import java.io.Serializable;
+
+public class Worker implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 91606388313702497L;
 	private int workerId;
 	private int casinoId;
 	private String name;
