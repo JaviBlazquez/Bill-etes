@@ -8,5 +8,5 @@ public interface ClientManager {
 	public Client getClient();
 	public void updateClient(Client C);
 	public List<Client> getListofClient();
-	public void removeClient(Client C)
+	public void removeClient(Client C);
 }
