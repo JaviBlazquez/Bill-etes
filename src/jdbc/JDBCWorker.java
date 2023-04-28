@@ -166,10 +166,4 @@ public class JDBCWorker implements WorkerManager{
 		}
 		return workerList;
 	}
-	
-	public Worker getWorker() {
-		
-		return null;
-	}
-
 }
