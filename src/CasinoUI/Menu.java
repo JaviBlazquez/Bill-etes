@@ -12,6 +12,35 @@ public class Menu {
 	
 	public static void main(String[] args) {
 		
+		try {
+			do {
+				System.out.println("Choose an option");
+				System.out.println("0. exit");
+				System.out.println("1. Login");
+				System.out.println("2. Register as a new client");
+				
+
+				int choice = Integer.parseInt(reader.readLine());
+				switch(choice)
+				{
+				case 2:
+					//registerNewClient();
+					break;
+				case 1:
+					//loginAsAdmin();
+					break;
+				case 0: 
+					//jdbcManager.disconnect();
+					//userManager.disconnect();
+					System.exit(0);
+				default:
+					break;
+				}
+			}while(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	
 	}
