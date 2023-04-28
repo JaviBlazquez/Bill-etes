@@ -2,7 +2,7 @@ package Interfaces;
 import java.util.List;
 
 import POJOS.Client;
-import POJOS.Machine;
+
 public interface ClientManager {
 	public void addClient(Client C);
 	public Client getClient();
