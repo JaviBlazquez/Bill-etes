@@ -1,10 +1,16 @@
 
 package POJOS;
 
-public class Casino {
+import java.io.Serializable;
+
+public class Casino implements Serializable{
 	
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9197997725060790303L;
 	private int casinoId;
 	private int accountId;
 	

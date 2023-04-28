@@ -1,7 +1,13 @@
 package POJOS;
 
-public class Machine {
+import java.io.Serializable;
 
+public class Machine implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6981898793485992283L;
 	private int machineId;
 	private String machineName;
 	private float moneyWon;

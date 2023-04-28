@@ -1,7 +1,13 @@
 package POJOS;
 
-public class Match {
+import java.io.Serializable;
+
+public class Match implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 176087543364843395L;
 	private int clientId;
 	private int tableId;
 	private int timeStamp;

@@ -1,6 +1,12 @@
 package POJOS;
 
-public class Client {
+import java.io.Serializable;
+
+public class Client implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9034033102536229349L;
 	private int clientId;
 	private int phone;
 	private float money;

@@ -1,7 +1,13 @@
 package POJOS;
 
-public class Game {
+import java.io.Serializable;
 
+public class Game implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3370777575023982414L;
 	private int clientId;
 	private int machineId;
 	private int timeStamp;

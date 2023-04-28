@@ -1,11 +1,16 @@
 package POJOS;
+import java.io.Serializable;
 
-public class BancaryAccount {
+public class BancaryAccount implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9025335208651977334L;
 	private float money;
 	private int accountId;
 	
-	public BancaryAccount(int _id,float _money) {
+	public BancaryAccount(int _id,float _money){
 		this.setAccountId(_id);
 		this.setMoney(_money);
 	}
