@@ -8,7 +8,7 @@ import POJOS.*;
 import jdbc.*;
 public class Menu {
 	
-	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
+	private static BufferedReader readers = new BufferedReader (new InputStreamReader(System.in));
 	
 	public static void main(String[] args) {
 		
@@ -20,7 +20,7 @@ public class Menu {
 				System.out.println("2. Register as a new client");
 				
 
-				int choice = Integer.parseInt(reader.readLine());
+				int choice = Integer.parseInt(readers.readLine());
 				switch(choice)
 				{
 				case 2:
