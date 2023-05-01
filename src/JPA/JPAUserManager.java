@@ -67,9 +67,12 @@ private EntityManager em;
 	}
 
 	@Override
-	public Role getRole(String email) {
+	public Role getRole(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNativeQuery("SELECT * FROM roles WHERE name=?", Role.class); 
+		q.setParameter(1, name);
+		Role role= (Role) q.getSingleResult();
+		return role;
 	}
 
 	@Override
