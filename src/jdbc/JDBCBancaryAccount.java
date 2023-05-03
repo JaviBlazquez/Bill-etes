@@ -2,6 +2,7 @@ package jdbc;
 import Interfaces.BancaryAccountManager;
 import java.sql.*;
 import POJOS.BancaryAccount;
+import POJOS.Machine;
 
 public class JDBCBancaryAccount implements BancaryAccountManager{
 	private JDBCManager manager;
@@ -40,7 +41,19 @@ public class JDBCBancaryAccount implements BancaryAccountManager{
 
 	@Override
 	public BancaryAccount getBancaryAccount() {
-		
+		try {
+			String sql = "Select * FROM bancaryaccount";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			ResultSet rs= prep.executeQuery();
+			while(rs.next()) {
+				int bancaryAccountId = rs.getInt("account_id");
+				float money_won = rs.getFloat("money");
+				BancaryAccount BA = new BancaryAccount(bancaryAccountId,money_won);
+				return BA;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 }
