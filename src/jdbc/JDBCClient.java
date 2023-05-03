@@ -7,7 +7,9 @@ import java.util.List;
 import POJOS.BancaryAccount;
 import POJOS.Client;
 import POJOS.Machine;
+import POJOS.Occupation;
 import POJOS.Table;
+import POJOS.Worker;
 public class JDBCClient implements ClientManager {
 	private JDBCManager manager;
 	public JDBCClient(JDBCManager m) {
@@ -79,5 +81,56 @@ public class JDBCClient implements ClientManager {
 	public Client getClient() {
 		
 		return null;
+	}
+	public List<Client> getClientByQuery(String query){
+		List<Client> clientList= new LinkedList<Client>();
+		try {
+			PreparedStatement prep = manager.getConnection().prepareStatement(query);
+			ResultSet rs= prep.executeQuery();
+			ResultSetMetaData rsmeta= rs.getMetaData();
+			Integer clientId=null;
+			Integer phone=null;	
+			Float money=null;
+			String name=null;
+			String surname=null;
+			Boolean condition=null;
+			int totalColumnas= rsmeta.getColumnCount();
+			while(rs.next()) {
+				for(int i=1; i<=totalColumnas; i++) {
+					switch(rsmeta.getColumnName(i)) {
+						case "client_id":{
+							clientId= rs.getInt(i);
+							break;
+						}
+						case "phone":{
+							phone= rs.getInt(i);
+							break;
+						}
+						case "money":{
+							money= rs.getFloat(i);
+							break;
+						}
+						case "name":{
+							name= rs.getString(i);
+							break;
+						}
+						case "surname":{
+							surname= rs.getString(i);
+							break;
+						}
+						case "condition":{
+							condition= rs.getBoolean(i);
+							break;
+						}
+						
+						
+					}
+				}
+				clientList.add(new Client(clientId, phone,money, name, surname,condition));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return clientList;
 	}
 }
