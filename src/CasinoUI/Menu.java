@@ -230,6 +230,7 @@ public class Menu {
 	}
 	private static void securityMenu(User u) throws NumberFormatException, IOException {
 		boolean bucle1 = true;
+		JDBCClient cliente = new JDBCClient(jdbcManager);
 		while(bucle1) {
 			System.out.println("Choose an option");
 			System.out.println("0. Return to login page");
@@ -246,7 +247,7 @@ public class Menu {
 				String email;
 				System.out.println("Introduce the client's email");
 				email = readers.readLine();
-				Client sus = userManager.getClientByMail(email); //Que la función te diga el nombre apellido y si es ludo
+				Client sus = userManager.getUserByMail(email); //Que la función te diga el nombre apellido y si es ludo
 															    //
 				System.out.println("Choose an option");
 				System.out.println("1. Delete Client");
@@ -254,7 +255,7 @@ public class Menu {
 				int option = Integer.parseInt(readers.readLine());
 					switch(option) {
 					case 1:
-						JDBCClient.removeClient(sus);
+						cliente.removeClient(sus);
 						break;
 					case 2:
 						bucle1 = false;
