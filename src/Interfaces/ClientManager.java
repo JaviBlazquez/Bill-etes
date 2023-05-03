@@ -9,4 +9,5 @@ public interface ClientManager {
 	public void updateClient(Client C);
 	public List<Client> getListofClient();
 	public void removeClient(Client C);
+	public List<Client> getClientByQuery(String query);
 }
