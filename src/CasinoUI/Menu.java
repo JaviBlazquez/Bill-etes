@@ -147,13 +147,13 @@ public class Menu {
 					System.out.println("4. Bancary account");
 					System.out.println("5. Worker list");
 					choice= Integer.parseInt(readers.readLine());
+					JDBCWorker jdbcWorker= new JDBCWorker(jdbcManager);
+					List<Worker> workers= jdbcWorker.getListOfWorkers();
 					switch(choice) {
 						case 0: 
 							bucle2=false;
 							break;
 						case 1:
-							JDBCWorker jdbcWorker= new JDBCWorker(jdbcManager);
-							List<Worker> workers= jdbcWorker.getListOfWorkers();
 							Iterator<Worker> itW= workers.iterator();
 							while(itW.hasNext()) {
 								Worker w=itW.next();
@@ -206,18 +206,61 @@ public class Menu {
 							System.out.println(jdbcBancaryAccount.getBancaryAccount());
 							break;
 						case 5:
-							//Preguntar por inicializacion de variables
 							jdbcWorker= new JDBCWorker(jdbcManager);
 							workers= jdbcWorker.getListOfWorkers();
-							itW= workers.iterator();
-							while(itW.hasNext()) {
-								System.out.println(itW.next());
+							Iterator<Worker> itW2= workers.iterator();
+							while(itW2.hasNext()) {
+								System.out.println(itW2.next());
 							}
 							break;
 					}
 				}
 				break;
 			case 2:
+				while(bucle3) {
+					System.out.println("Choose an option");
+					System.out.println("0. Return to previus page");
+					System.out.println("1. Client's state");
+					System.out.println("2. Bancary account");
+					System.out.println("3. Worker");
+					System.out.println("4. Create turn");// no se muy bien q hace esto
+					choice= Integer.parseInt(readers.readLine());
+					switch(choice) {
+						case 0: 
+							bucle3=false;
+							break;
+						case 1:
+							int clientId;
+							JDBCClient jdbcClient= new JDBCClient(jdbcManager); 
+							System.out.println("Introduce the client's id");
+							clientId = Integer.parseInt(readers.readLine());
+							List<Client> clients= jdbcClient.getClientByQuery("SELECT * FROM client WHERE client_id= "+clientId);
+							Iterator<Client> itC= clients.iterator();
+							Client client= itC.next();
+							if(client.isCondition()) {
+								client.setCondition(false);
+							}else {
+								client.setCondition(true);
+							}
+							jdbcClient.updateClient(client);
+							break;
+						case 2:
+							float money;
+							System.out.println("Introduce the new ammount of money");
+							money = Float.parseFloat(readers.readLine());
+							JDBCBancaryAccount jdbcBancaryAccount= new JDBCBancaryAccount(jdbcManager);
+							BancaryAccount bancaryAccount= jdbcBancaryAccount.getBancaryAccount();
+							bancaryAccount.setMoney(money);
+							jdbcBancaryAccount.updateBancaryAccount(bancaryAccount);
+							break;
+						case 3:
+							
+							break;
+						case 4:
+							
+							break;
+					}
+				}
 				break;
 			default:
 				break;
