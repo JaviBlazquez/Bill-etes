@@ -3,6 +3,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+
+import Exceptions.MoneyException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -294,9 +297,10 @@ public class Menu {
 	
 		
 	}
-	private static void clientMenu(User u) throws NumberFormatException, IOException {
+	private static void clientMenu(User u) throws NumberFormatException, IOException, MoneyException {
 		boolean bucle1=true;
 		boolean bucle2=false;
+		boolean bucle3=true;
 		while(bucle1){
 			System.out.println("Choose an option");
 			System.out.println("0. Return to menu");
@@ -316,7 +320,7 @@ public class Menu {
 					while(itC.hasNext()) {
 						Client c=itC.next();
 						if(c.getClientId()==u.getId()) {
-							System.out.println("Current money: "+c.getMoney());
+							System.out.println("Current money: "+c.getMoney());}}
 					System.out.println("Choose an option");
 					System.out.println("0. Return");
 					System.out.println("1. Deposit money");
@@ -324,7 +328,24 @@ public class Menu {
 					int choice2 = Integer.parseInt(readers.readLine());
 					switch(choice2) {
 					case 1:
-						
+						int deposit = Integer.parseInt(readers.readLine());
+						Iterator<Client> itC2= client.iterator();
+						while(itC2.hasNext()) {
+							Client c=itC.next();
+							if(c.getClientId()==u.getId()) {
+								c.setMoney(c.getMoney()-deposit);
+								bucle3=false;}}
+					case 2:
+						while(bucle3) {
+							int extraction = Integer.parseInt(readers.readLine());
+							Iterator<Client> itC3= client.iterator();
+							while(itC3.hasNext()) {
+								Client c=itC.next();
+								if(c.getClientId()==u.getId()) {
+									if(c.getMoney()<extraction) {throw new MoneyException("It is not possible to extract that amount of money");}
+									c.setMoney(c.getMoney()-extraction);
+									bucle3=false;}}
+						}
 						
 						
 					}
