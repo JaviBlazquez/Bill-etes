@@ -12,13 +12,13 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlAccessType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "Worker")
 @XmlType(propOrder = { "salary", "addres", "occupation"})
 public class Worker implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 91606388313702497L;
+	
 	
 	@XmlTransient
 	private int workerId;
@@ -33,7 +33,6 @@ public class Worker implements Serializable{
 	@XmlElement
 	private String addres;
 	@XmlElement(name = "Occupation")
-	@XmlElementWrapper(name = "Occupations")
 	private Occupation occupation;
 	public Worker(int workerId, int casinoId, String name, String surname, float salary, String addres, Occupation occupation) {
 		super();
