@@ -2,6 +2,7 @@ package Interfaces;
 
 import java.util.List;
 
+
 import POJOS.Role;
 import POJOS.User;
 
@@ -15,4 +16,6 @@ public interface UserManager {
 	public List<Role> getRoles();
 	
 	public User checkPassword(String email, String passwd);
+	
+	public User getUserByEmail(String email);
 }

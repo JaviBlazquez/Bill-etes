@@ -246,19 +246,36 @@ public class Menu {
 				bucle1=false;
 				break;
 			case 1:
-				JDBCClient jdbcClient= new JDBCClient(jdbcManager);
+				
 				String email;
 				System.out.println("Introduce the client's email");
 				email = readers.readLine();
-				Client sus = userManager.getUserByMail(email); //Que la función te diga el nombre apellido y si es ludo
-															    //
+				User sus = userManager.getUserByEmail(email); //Que la función te diga el nombre apellido y si es ludo
+				JDBCClient jdbcClient= new JDBCClient(jdbcManager);
+				List<Client> client= jdbcClient.getListofClient();
+				Iterator<Client> itC= client.iterator();
+				
+				while(itC.hasNext()) {
+					boolean a = false;
+					Client c=itC.next();
+					if(c.getClientId()==sus.getId()) {
+						jdbcClient.removeClient(c);
+						a = true;
+					}
+					if(a) {
+						
+					}
+				}
+					}
+				
 				System.out.println("Choose an option");
 				System.out.println("1. Delete Client");
 				System.out.println("2. Return to menu");
+				
 				int option = Integer.parseInt(readers.readLine());
 					switch(option) {
 					case 1:
-						cliente.removeClient(sus);
+						
 						break;
 					case 2:
 						bucle1 = false;
