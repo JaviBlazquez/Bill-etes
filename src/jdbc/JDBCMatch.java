@@ -21,7 +21,7 @@ public class JDBCMatch {
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, m.getClientId());
 			prep.setInt(2,m.getTableId());
-			prep.setInt(3, m.getTimeStamp());
+			prep.setTimestamp(3, m.getTimeStamp());
 			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class JDBCMatch {
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, m.getClientId());
 			prep.setInt(2, m.getTableId());
-			prep.setInt(3, m.getTimeStamp());
+			prep.setTimestamp(3, m.getTimeStamp());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

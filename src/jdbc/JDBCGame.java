@@ -20,7 +20,7 @@ public class JDBCGame implements GameManager{
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, g.getClientId());
 			prep.setInt(2,g.getMachineId());
-			prep.setInt(3, g.getTimeStamp());
+			prep.setTimestamp(3, g.getTimeStamp());
 			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class JDBCGame implements GameManager{
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, g.getClientId());
 			prep.setInt(2, g.getMachineId());
-			prep.setInt(3, g.getTimeStamp());
+			prep.setTimestamp(3, g.getTimeStamp());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
