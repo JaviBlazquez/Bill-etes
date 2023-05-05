@@ -15,11 +15,13 @@ public class Menu {
 	private static BufferedReader readers = new BufferedReader (new InputStreamReader(System.in));
 	private static JDBCManager jdbcManager= new JDBCManager();
 	private static JPAUserManager userManager= new JPAUserManager();
+	
 	private static void login() throws IOException {
 		System.out.println("Introduce your email");
 		String email = readers.readLine();
 		System.out.println("Introduce your password");
 		String password = readers.readLine();
+		
 		User u= userManager.checkPassword(email, password);
 		switch(u.getRole().getName()) {
 			case "croupier":{
@@ -119,6 +121,7 @@ public class Menu {
 		return true;
 	}
 	private static void croupierMenu(User u) {
+
 		
 	}
 	private static void administrationMenu(User u) throws NumberFormatException, IOException {
@@ -225,8 +228,54 @@ public class Menu {
 		}
 		
 	}
-	private static void securityMenu(User u) {
+	private static void securityMenu(User u) throws NumberFormatException, IOException {
+		boolean bucle1 = true;
+		JDBCClient cliente = new JDBCClient(jdbcManager);
+		while(bucle1) {
+			System.out.println("Choose an option");
+			System.out.println("0. Return to login page");
+			System.out.println("1. Access a client info");
+			//System.out.println("2. Ban a client from the database");
+			int choice = Integer.parseInt(readers.readLine());
+			switch(choice)
+			{
+			case 0: 
+				bucle1=false;
+				break;
+			case 1:
+				JDBCClient jdbcClient= new JDBCClient(jdbcManager);
+				String email;
+				System.out.println("Introduce the client's email");
+				email = readers.readLine();
+				Client sus = userManager.getUserByMail(email); //Que la función te diga el nombre apellido y si es ludo
+															    //
+				System.out.println("Choose an option");
+				System.out.println("1. Delete Client");
+				System.out.println("2. Return to menu");
+				int option = Integer.parseInt(readers.readLine());
+					switch(option) {
+					case 1:
+						cliente.removeClient(sus);
+						break;
+					case 2:
+						bucle1 = false;
+						break;
+						
+					
+					}
+				
+				break;
+			
+				
+				
+			}
+			
+			
+			
+		}
+		
 	
+		
 	}
 	private static void clientMenu(User u) throws NumberFormatException, IOException {
 		boolean bucle1=true;
