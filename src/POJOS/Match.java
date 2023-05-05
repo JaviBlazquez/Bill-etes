@@ -1,6 +1,7 @@
 package POJOS;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class Match implements Serializable{
 	
@@ -10,9 +11,9 @@ public class Match implements Serializable{
 	private static final long serialVersionUID = 176087543364843395L;
 	private int clientId;
 	private int tableId;
-	private int timeStamp;
+	private Timestamp timeStamp;
 	
-	public Match(int clientId, int tableId, int timeStamp) {
+	public Match(int clientId, int tableId, Timestamp timeStamp) {
 		super();
 		this.clientId = clientId;
 		this.tableId = tableId;
@@ -35,11 +36,11 @@ public class Match implements Serializable{
 		this.tableId = tableId;
 	}
 
-	public int getTimeStamp() {
+	public Timestamp getTimeStamp() {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(int timeStamp) {
+	public void setTimeStamp(Timestamp timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 

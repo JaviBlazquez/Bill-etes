@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.Timestamp;
 import java.util.List;
+
+import Exceptions.MoneyException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -38,7 +41,12 @@ public class Menu {
 				break;
 			}
 			default:{
-				clientMenu(u);
+				try {
+					clientMenu(u);
+				}catch( MoneyException ex) {
+					System.out.println(ex);
+				}
+				
 			}
 		}
 	}
@@ -345,19 +353,36 @@ public class Menu {
 				bucle1=false;
 				break;
 			case 1:
-				JDBCClient jdbcClient= new JDBCClient(jdbcManager);
+				
 				String email;
 				System.out.println("Introduce the client's email");
 				email = readers.readLine();
-				Client sus = userManager.getUserByMail(email); //Que la función te diga el nombre apellido y si es ludo
-															    //
+				User sus = userManager.getUserByEmail(email); //Que la función te diga el nombre apellido y si es ludo
+				JDBCClient jdbcClient= new JDBCClient(jdbcManager);
+				List<Client> client= jdbcClient.getListofClient();
+				Iterator<Client> itC= client.iterator();
+				
+				while(itC.hasNext()) {
+					boolean a = false;
+					Client c=itC.next();
+					if(c.getClientId()==sus.getId()) {
+						jdbcClient.removeClient(c);
+						a = true;
+					}
+					if(a) {
+						
+					}
+				}
+					}
+				
 				System.out.println("Choose an option");
 				System.out.println("1. Delete Client");
 				System.out.println("2. Return to menu");
+				
 				int option = Integer.parseInt(readers.readLine());
 					switch(option) {
 					case 1:
-						cliente.removeClient(sus);
+						
 						break;
 					case 2:
 						bucle1 = false;
@@ -378,8 +403,98 @@ public class Menu {
 		
 	
 		
-	}
-	private static void clientMenu(User u) {
+	
+	private static void clientMenu(User u) throws NumberFormatException, IOException, MoneyException {
+		boolean bucle1=true;
+		boolean bucle2=false;
+		boolean bucle3=true;
+		while(bucle1){
+			System.out.println("Choose an option");
+			System.out.println("0. Return to menu");
+			System.out.println("1. Administrate account");
+			System.out.println("2. View game record");
+			int choice = Integer.parseInt(readers.readLine());
+			switch(choice) {
+			case 0:
+				bucle1=false;
+				break;
+			case 1:
+				bucle2=true;
+				while(bucle2) {
+					JDBCClient jdbcClient= new JDBCClient(jdbcManager);
+					List<Client> client= jdbcClient.getListofClient();
+					Iterator<Client> itC= client.iterator();
+					while(itC.hasNext()) {
+						Client c=itC.next();
+						if(c.getClientId()==u.getId()) {
+							System.out.println("Current money: "+c.getMoney());}}
+					System.out.println("Choose an option");
+					System.out.println("0. Return");
+					System.out.println("1. Deposit money");
+					System.out.println("2. Extract money");
+					int choice2 = Integer.parseInt(readers.readLine());
+					switch(choice2) {
+					case 1:
+						int deposit = Integer.parseInt(readers.readLine());
+						Iterator<Client> itC2= client.iterator();
+						while(itC2.hasNext()) {
+							Client c=itC.next();
+							if(c.getClientId()==u.getId()) {
+								c.setMoney(c.getMoney()-deposit);
+								bucle3=false;}}
+					case 2:
+						while(bucle3) {
+							int extraction = Integer.parseInt(readers.readLine());
+							Iterator<Client> itC3= client.iterator();
+							while(itC3.hasNext()) {
+								Client c=itC.next();
+								if(c.getClientId()==u.getId()) {
+									if(c.getMoney()<extraction) {throw new MoneyException("It is not possible to extract that amount of money");}
+									c.setMoney(c.getMoney()-extraction);
+									bucle3=false;}}
+						}
+						
+						
+					}
+					}
+			case 2:
+				bucle2=true;
+				while(bucle2) {
+					System.out.println("Choose an option");
+					System.out.println("0. Return");
+					System.out.println("1. Game record");
+					System.out.println("2. Match record");
+					int choice2 = Integer.parseInt(readers.readLine());
+					switch(choice2) {
+					case 1:
+						JDBCGame jdbcGame= new JDBCGame(jdbcManager);
+						List<Game> game= jdbcGame.getListOfGames();
+						Iterator<Game> itG= game.iterator();
+						while(itG.hasNext()) {
+							Game g=itG.next();
+							if(g.getClientId()==u.getId()) {
+								System.out.println("Machine: "+g.getMachineId()+" Date: "+g.getTimeStamp());
+							}
+						}
+						break;
+
+					case 2:
+						JDBCMatch jdbcMatch= new JDBCMatch(jdbcManager);
+						List<Match> match= jdbcMatch.getListOfMatches();
+						Iterator<Match> itM= match.iterator();
+						while(itM.hasNext()) {
+							Match m=itM.next();
+							if(m.getClientId()==u.getId()) {
+								System.out.println("Table: "+m.getTableId()+" Date: "+m.getTimeStamp());
+							}
+						}
+						break;
+					}
+				
+			}
+		}
+		
+		}
 		
 	}
 	public static void main(String[] args) {
