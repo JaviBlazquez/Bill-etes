@@ -19,6 +19,7 @@ public class Client implements Serializable{
 	 */
 	private static final long serialVersionUID = -9034033102536229349L;
 	
+	
 	@XmlTransient
 	private int clientId;
 	@XmlElement

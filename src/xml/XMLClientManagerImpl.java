@@ -11,6 +11,7 @@ import POJOS.Client;
 
 public class XMLClientManagerImpl implements XMLClientManager {
 
+	
 	@Override
 	public void clientToXml(Client c) {
 		try {

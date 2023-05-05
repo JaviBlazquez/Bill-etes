@@ -8,6 +8,7 @@ import javax.xml.bind.Marshaller;
 import Interfaces.XMLCasinoManager;
 import POJOS.Casino;
 
+
 public class XMLCasinoManagerImpl implements XMLCasinoManager{
 
 	@Override

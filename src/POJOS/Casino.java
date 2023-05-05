@@ -27,6 +27,7 @@ public class Casino implements Serializable{
 		this.workers = workers;
 	}
 
+	
 	/**
 	 * 
 	 */

@@ -19,6 +19,7 @@ public class Worker implements Serializable{
 	 */
 	private static final long serialVersionUID = 91606388313702497L;
 	
+	
 	@XmlTransient
 	private int workerId;
 	@XmlTransient
