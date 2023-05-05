@@ -1,6 +1,7 @@
 package POJOS;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class Game implements Serializable{
 
