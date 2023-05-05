@@ -35,7 +35,7 @@ public class User implements Serializable {
 	
 	
 	public User() {
-		super();
+		super(); 
 	}
 	public User(Integer id, String email, byte[] password, Role role) {
 		super();
