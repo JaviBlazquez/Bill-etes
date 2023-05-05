@@ -2,17 +2,38 @@ package POJOS;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlAccessType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Worker")
+@XmlType(propOrder = { "salary", "addres", "occupation"})
 public class Worker implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 91606388313702497L;
+	
+	@XmlTransient
 	private int workerId;
+	@XmlTransient
 	private int casinoId;
+	@XmlAttribute
 	private String name;
+	@XmlAttribute
 	private String surname;
+	@XmlElement
 	private float salary;
+	@XmlElement
 	private String addres;
+	@XmlElement(name = "Occupation")
+	@XmlElementWrapper(name = "Occupations")
 	private Occupation occupation;
 	public Worker(int workerId, int casinoId, String name, String surname, float salary, String addres, Occupation occupation) {
 		super();
