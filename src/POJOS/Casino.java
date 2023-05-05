@@ -40,9 +40,8 @@ public class Casino implements Serializable{
 	@XmlElementWrapper(name = "Workers")
 	private List<Worker> workers;
 	
-	public Casino (int casinoId, int accountId, List<Worker> l1) {
+	public Casino (int casinoId, int accountId) {
 		this.casinoId = casinoId;
-		this.workers = l1;
 		this.accountId = accountId;
 	}
 
