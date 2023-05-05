@@ -2,6 +2,7 @@ package CasinoUI;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.Timestamp;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,7 +12,7 @@ import JPA.JPAUserManager;
 import POJOS.*;
 import jdbc.*;
 public class Menu {
-	
+	private static final int casinoId= 0;
 	private static BufferedReader readers = new BufferedReader (new InputStreamReader(System.in));
 	private static JDBCManager jdbcManager= new JDBCManager();
 	private static JPAUserManager userManager= new JPAUserManager();
@@ -103,7 +104,7 @@ public class Menu {
 				occupation= Occupation.ADMINISTRATION;
 			}
 		}
-		jdbcWorker.addWorker(new Worker(id, 0, name, surname, salary, address, occupation));
+		jdbcWorker.addWorker(new Worker(id, casinoId, name, surname, salary, address, occupation));
 	}
 	private static boolean checkEmail(String email) {
 		List<Role> roles= userManager.getRoles();
@@ -226,7 +227,7 @@ public class Menu {
 					System.out.println("1. Client's state");
 					System.out.println("2. Bancary account");
 					System.out.println("3. Worker");
-					System.out.println("4. Create turn");// no se muy bien q hace esto
+					System.out.println("4. Create shift");
 					choice= Integer.parseInt(readers.readLine());
 					switch(choice) {
 						case 0: 
@@ -257,10 +258,68 @@ public class Menu {
 							jdbcBancaryAccount.updateBancaryAccount(bancaryAccount);
 							break;
 						case 3:
-							
+							boolean bucle4= true;
+							while(bucle4) {
+								JDBCWorker jdbcWorker= new JDBCWorker(jdbcManager);
+								List<Worker> workers= jdbcWorker.getListOfWorkers();
+								Iterator<Worker> itW= workers.iterator();
+								System.out.println("Choose an option");
+								System.out.println("0. Return to previus page");
+								System.out.println("1. Modify salary");
+								System.out.println("2. Add Worker");
+								System.out.println("3. Remove Worker");
+								choice= Integer.parseInt(readers.readLine());
+								switch(choice) {
+									case 0:
+										bucle4=false;
+										break;
+									case 1:
+										System.out.println("Introduce workerId");
+										Integer workerId= Integer.parseInt(readers.readLine());
+										System.out.println("Introduce new salary");
+										float salary= Float.parseFloat(readers.readLine());
+										while(itW.hasNext()) {
+											Worker worker= itW.next();
+											if(workerId==worker.getWorkerId()) {
+												worker.setSalary(salary);
+												jdbcWorker.updateWorker(worker);
+												break;
+											}
+										}
+									case 2:
+										registerWorker();
+										break;
+									case 3:
+										System.out.println("Introduce workerId");
+										Integer workerId2= Integer.parseInt(readers.readLine());
+										while(itW.hasNext()) {
+											Worker worker= itW.next();
+											if(workerId2==worker.getWorkerId()) {
+												jdbcWorker.removeWorker(worker);
+												break;
+											}
+										}
+										break;
+										
+									}
+							}
 							break;
 						case 4:
-							
+							JDBCShift jdbcShift= new JDBCShift(jdbcManager);
+							System.out.println("Introduce workerId");
+							Integer workerId= Integer.parseInt(readers.readLine());
+							System.out.println("Introduce tableId");
+							Integer tableId= Integer.parseInt(readers.readLine());
+							Timestamp timestamp;
+							System.out.println("Introduce month");
+							int month= Integer.parseInt(readers.readLine());
+							System.out.println("Introduce day");
+							int day= Integer.parseInt(readers.readLine());
+							System.out.println("Introduce hour");
+							int hour= Integer.parseInt(readers.readLine());
+							System.out.println("Introduce minute");
+							int minute= Integer.parseInt(readers.readLine());
+							jdbcShift.addShift(new Shift(tableId,workerId, new Timestamp(2023,month,day,hour,minute,0,0)));
 							break;
 					}
 				}
@@ -320,88 +379,16 @@ public class Menu {
 	
 		
 	}
-	private static void clientMenu(User u) throws NumberFormatException, IOException {
-		boolean bucle1=true;
-		boolean bucle2=false;
-		while(bucle1){
-			System.out.println("Choose an option");
-			System.out.println("0. Return to menu");
-			System.out.println("1. Administrate account");
-			System.out.println("2. View game record");
-			int choice = Integer.parseInt(readers.readLine());
-			switch(choice) {
-			case 0:
-				bucle1=false;
-				break;
-			case 1:
-				bucle2=true;
-				while(bucle2) {
-					JDBCClient jdbcClient= new JDBCClient(jdbcManager);
-					List<Client> client= jdbcClient.getListofClient();
-					Iterator<Client> itC= client.iterator();
-					while(itC.hasNext()) {
-						Client c=itC.next();
-						if(g.getClientId()==u.getId()) {
-							System.out.println("Current money: "+c.getMoney());
-					System.out.println("Choose an option");
-					System.out.println("0. Return");
-					System.out.println("1. Deposit money");
-					System.out.println("2. Extract money");
-					int choice2 = Integer.parseInt(readers.readLine());
-					switch(choice2) {
-					case 1:
-						
-						
-						
-					}
-					}
-			case 2:
-				bucle2=true;
-				while(bucle2) {
-					System.out.println("Choose an option");
-					System.out.println("0. Return");
-					System.out.println("1. Game record");
-					System.out.println("2. Match record");
-					int choice2 = Integer.parseInt(readers.readLine());
-					switch(choice2) {
-					case 1:
-						JDBCGame jdbcGame= new JDBCGame(jdbcManager);
-						List<Game> game= jdbcGame.getListOfGames();
-						Iterator<Game> itG= game.iterator();
-						while(itG.hasNext()) {
-							Game g=itG.next();
-							if(g.getClientId()==u.getId()) {
-								System.out.println("Machine: "+g.getMachineId()+" Date: "+g.getTimeStamp());
-							}
-						}
-						break;
-
-					case 2:
-						JDBCMatch jdbcMatch= new JDBCMatch(jdbcManager);
-						List<Match> match= jdbcMatch.getListOfMatches();
-						Iterator<Match> itM= match.iterator();
-						while(itM.hasNext()) {
-							Match m=itM.next();
-							if(m.getClientId()==u.getId()) {
-								System.out.println("Table: "+m.getTableId()+" Date: "+m.getTimeStamp());
-							}
-						}
-						break;
-					}
-				
-			}
-		}
-		
+	private static void clientMenu(User u) {
 		
 	}
-		
 	public static void main(String[] args) {
 		try {
 			do {
 				System.out.println("Choose an option");
 				System.out.println("0. exit");
 				System.out.println("1. Login");
-				//System.out.println("2. Register as a new client");
+				System.out.println("2. Register as a new client");
 				
 
 				int choice = Integer.parseInt(readers.readLine());
@@ -415,7 +402,7 @@ public class Menu {
 					login();
 					break;
 				case 2:
-					//registerClient();
+					registerClient();
 					break;
 				default:
 					break;
@@ -428,8 +415,4 @@ public class Menu {
 		
 	
 	}
-	
-	
-	
-	
 }
