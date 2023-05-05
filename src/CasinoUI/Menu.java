@@ -298,7 +298,7 @@ public class Menu {
 					Iterator<Client> itC= client.iterator();
 					while(itC.hasNext()) {
 						Client c=itC.next();
-						if(g.getClientId()==u.getId()) {
+						if(c.getClientId()==u.getId()) {
 							System.out.println("Current money: "+c.getMoney());
 					System.out.println("Choose an option");
 					System.out.println("0. Return");
