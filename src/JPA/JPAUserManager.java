@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import Interfaces.UserManager;
+import POJOS.Client;
 import POJOS.Role;
 import POJOS.User;
 
@@ -26,7 +27,7 @@ private EntityManager em;
 	public void connect() {
 		// TODO Auto-generated method stub
 		
-		em = Persistence.createEntityManagerFactory("zooDemo-provider").createEntityManager();
+		em = Persistence.createEntityManagerFactory("casino.db").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
@@ -107,5 +108,21 @@ private EntityManager em;
 		
 		return u;
 	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		
+		User u = null;
+		Query q = em.createNativeQuery("Select * from users where email =?", User.class);
+		q.setParameter(1, email);
+		try {
+			u = (User) q.getSingleResult();
+			
+		}catch(NoResultException e) {}
+
+		return u;
+	}
+
+	
 
 }
