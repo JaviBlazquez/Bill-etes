@@ -51,6 +51,24 @@ public class JDBCClient implements ClientManager {
 			prep.setString(3, C.getName());
 			prep.setString(4, C.getSurname());
 			prep.setBoolean(5, C.isCondition());
+			prep.setInt(6, C.getClientId());
+			prep.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void updateClient(Client C, int id) {
+		try {
+			String sql = "UPDATE client SET phone,money,name,surname,condition,client_id = {?,?,?,?,?,?}"
+					+ "WHERE client.clientId = {?}";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, C.getPhone());
+			prep.setFloat(2, C.getMoney());
+			prep.setString(3, C.getName());
+			prep.setString(4, C.getSurname());
+			prep.setBoolean(5, C.isCondition());
+			prep.setInt(6, C.getClientId());
+			prep.setInt(7, id);
 			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

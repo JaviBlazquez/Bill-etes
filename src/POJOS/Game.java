@@ -11,11 +11,11 @@ public class Game implements Serializable{
 	private static final long serialVersionUID = 3370777575023982414L;
 	private int clientId;
 	private int machineId;
-	private int timeStamp;
+	private Timestamp timeStamp;
 	
 	
 	
-	public Game(int clientId, int machineId, int timeStamp) {
+	public Game(int clientId, int machineId, Timestamp timeStamp) {
 		super();
 		this.clientId = clientId;
 		this.machineId = machineId;
@@ -34,10 +34,10 @@ public class Game implements Serializable{
 	public void setMachineId(int machineId) {
 		this.machineId = machineId;
 	}
-	public int getTimeStamp() {
+	public Timestamp getTimeStamp() {
 		return timeStamp;
 	}
-	public void setTimeStamp(int timeStamp) {
+	public void setTimeStamp(Timestamp timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 

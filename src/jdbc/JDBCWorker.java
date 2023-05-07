@@ -88,6 +88,25 @@ public class JDBCWorker implements WorkerManager{
 		}
 		
 	}
+	
+	public void updateWorker(Worker w, int id) {
+		try {
+			String sql = "UPDATE worker SET name, surname, salary, addres, occupation = {?,?,?,?,?,?}"
+					+ "WHERE worker.workerId = {?}";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, w.getName());
+			prep.setString(2, w.getSurname());
+			prep.setFloat(3, w.getSalary());
+			prep.setString(4, w.getAddres());
+			prep.setString(5, w.getOccupationString());
+			prep.setInt(6, w.getWorkerId());
+			prep.setInt(7, id);
+			prep.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	@Override
 	public void removeWorker(Worker w) {

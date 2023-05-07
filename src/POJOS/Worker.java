@@ -86,13 +86,13 @@ public class Worker implements Serializable{
 	public String getOccupationString() {
 		switch(this.occupation) {
 			case SECURITY:{
-				return "Security";
+				return "security";
 			}
 			case CROUPIER:{
-				return "Croupier";
+				return "croupier";
 			}
 			default:{
-				return "Administration";
+				return "administration";
 			}
 		}
 	}

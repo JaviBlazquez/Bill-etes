@@ -1,6 +1,7 @@
 package POJOS;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class Shift implements Serializable{
 
@@ -10,11 +11,11 @@ public class Shift implements Serializable{
 	private static final long serialVersionUID = -1385339185760201333L;
 	private int tableId;
 	private int croupierId;
-	private int timeStamp;
+	private Timestamp timeStamp;
 	
 	
 	
-	public Shift(int tableId, int croupierId, int timeStamp) {
+	public Shift(int tableId, int croupierId, Timestamp timeStamp) {
 		super();
 		this.tableId = tableId;
 		this.croupierId = croupierId;
@@ -33,10 +34,10 @@ public class Shift implements Serializable{
 	public void setCroupierId(int croupierId) {
 		this.croupierId = croupierId;
 	}
-	public int getTimeStamp() {
+	public Timestamp getTimeStamp() {
 		return timeStamp;
 	}
-	public void setTimeStamp(int timeStamp) {
+	public void setTimeStamp(Timestamp timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 

@@ -2,7 +2,7 @@ package CasinoUI;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.List;
 
 import Exceptions.MoneyException;
@@ -16,6 +16,8 @@ import POJOS.*;
 import jdbc.*;
 public class Menu {
 	private static final int casinoId= 0;
+	private static final int accountId= 0;
+	private Casino casino= new Casino(casinoId,accountId);
 	private static BufferedReader readers = new BufferedReader (new InputStreamReader(System.in));
 	private static JDBCManager jdbcManager= new JDBCManager();
 	private static JPAUserManager userManager= new JPAUserManager();
@@ -113,6 +115,7 @@ public class Menu {
 			}
 		}
 		jdbcWorker.addWorker(new Worker(id, casinoId, name, surname, salary, address, occupation));
+		
 	}
 	private static boolean checkEmail(String email) {
 		List<Role> roles= userManager.getRoles();
@@ -128,6 +131,61 @@ public class Menu {
 			}
 		}
 		return true;
+	}
+	private static void removeUser(User u) {
+		switch(u.getRole().getName()) {
+			case "client":
+				JDBCClient jdbcClient= new JDBCClient(jdbcManager);
+				List<Client> clients= jdbcClient.getListofClient();
+				Iterator<Client> itC= clients.iterator();
+				while(itC.hasNext()) {
+					Client client= itC.next();
+					if(u.getId()<client.getClientId()) {
+						client.setClientId(client.getClientId()-1);
+						jdbcClient.updateClient(client, client.getClientId()+1);
+					}
+					if(u.getId()==client.getClientId()) {
+						jdbcClient.removeClient(client);
+					}
+				}
+				List<User> usersC=u.getRole().getUsers();
+				Iterator<User> ItUC= usersC.iterator();
+				while(ItUC.hasNext()) {
+					User userC= ItUC.next();
+					if(u.getId()<userC.getId()) {
+						userC.setId(userC.getId()-1);
+					}
+				}
+				u.getRole().removeUser(u);
+				jdbcManager.removeUser(u); //Hay q hacer esta función
+				break;
+			default:
+				JDBCWorker jdbcWorker= new JDBCWorker(jdbcManager);
+				List<Worker> workers= jdbcWorker.getListOfWorkers();
+				Iterator<Worker> itW= workers.iterator();
+				while(itW.hasNext()) {
+					Worker worker= itW.next();
+					if(u.getId()<worker.getWorkerId()) {
+						worker.setWorkerId(worker.getWorkerId()-1);
+						jdbcWorker.updateWorker(worker, worker.getWorkerId()+1);
+					}
+					if(u.getId()==worker.getWorkerId()) {
+						jdbcWorker.removeWorker(worker);
+					}
+				}
+				List<User> usersW=userManager.getRole("croupier").getUsers();
+				usersW.addAll(userManager.getRole("security").getUsers());
+				usersW.addAll(userManager.getRole("administration").getUsers());
+				Iterator<User> ItUW= usersW.iterator();
+				while(ItUW.hasNext()) {
+					User userW= ItUW.next();
+					if(u.getId()<userW.getId()) {
+						userW.setId(userW.getId()-1);
+					}
+				}
+				u.getRole().removeUser(u);
+				jdbcManager.removeUser(u); //Hay q hacer esta función
+		}
 	}
 	private static void croupierMenu(User u) {
 
@@ -302,11 +360,16 @@ public class Menu {
 										Integer workerId2= Integer.parseInt(readers.readLine());
 										while(itW.hasNext()) {
 											Worker worker= itW.next();
-											if(workerId2==worker.getWorkerId()) {
-												jdbcWorker.removeWorker(worker);
-												break;
+											List<User> users= userManager.getRole(worker.getOccupationString()).getUsers();
+											Iterator<User> itU= users.iterator();
+											while(itU.hasNext()) {
+												User uW= itU.next();
+												if(worker.getWorkerId()==uW.getId()) {
+													removeUser(uW);
+												}
 											}
 										}
+										
 										break;
 										
 									}
