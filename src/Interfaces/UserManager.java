@@ -18,4 +18,6 @@ public interface UserManager {
 	public User checkPassword(String email, String passwd);
 	
 	public User getUserByEmail(String email);
+	
+	public void removeUser(User u);
 }

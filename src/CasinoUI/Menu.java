@@ -157,7 +157,7 @@ public class Menu {
 					}
 				}
 				u.getRole().removeUser(u);
-				jdbcManager.removeUser(u); //Hay q hacer esta función
+				userManager.removeUser(u);
 				break;
 			default:
 				JDBCWorker jdbcWorker= new JDBCWorker(jdbcManager);
@@ -184,7 +184,7 @@ public class Menu {
 					}
 				}
 				u.getRole().removeUser(u);
-				jdbcManager.removeUser(u); //Hay q hacer esta función
+				userManager.removeUser(u); 
 		}
 	}
 	private static void croupierMenu(User u) {

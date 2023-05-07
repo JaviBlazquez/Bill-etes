@@ -37,8 +37,8 @@ public class JDBCGame implements GameManager{
 			while(rs.next()) {
 				int gameId = rs.getInt("gameID");
 				int clientId = rs.getInt("clientID");
-				int timeStamp = rs.getInt("timeStamp");
-				
+				Timestamp timeStamp = rs.getTimestamp("timeStamp");
+				gameList.add(new Game(gameId,clientId,timeStamp));
 			}
 			return gameList;
 		}catch(Exception e) {

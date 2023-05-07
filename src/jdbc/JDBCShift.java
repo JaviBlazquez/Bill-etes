@@ -2,6 +2,7 @@ package jdbc;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public void addShift(Shift s) {
 		PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 		prep.setInt(1, s.getTableId());
 		prep.setInt(2, s.getCroupierId());
-		prep.setInt(3, s.getTimeStamp());
+		prep.setTimestamp(3, s.getTimeStamp());
 		prep.executeUpdate();
 	}catch(Exception e) {
 		e.printStackTrace();
@@ -38,7 +39,7 @@ public List<Shift> getListOfShifts() {
 		while(rs.next()) {
 			int tableId = rs.getInt("table_id");
 			int croupierId = rs.getInt("croupier_id");
-			int timeStamp = rs.getInt("time_Stamp");
+			Timestamp timeStamp = rs.getTimestamp("time_Stamp");
 			Shift s= new Shift(tableId, croupierId, timeStamp);
 			shiftList.add(s);
 			}
@@ -57,7 +58,7 @@ public void updateShift(Shift s) {
 		PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 		prep.setInt(1, s.getTableId());
 		prep.setInt(2, s.getCroupierId());
-		prep.setInt(3, s.getTimeStamp());
+		prep.setTimestamp(3, s.getTimeStamp());
 		prep.executeUpdate();
 	}catch(Exception e) {
 		e.printStackTrace();

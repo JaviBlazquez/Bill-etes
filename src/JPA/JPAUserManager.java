@@ -123,6 +123,10 @@ private EntityManager em;
 		return u;
 	}
 
+	@Override
+	public void removeUser(User u) {
+			em.remove(u);
+	}
 	
 
 }

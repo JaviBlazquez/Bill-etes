@@ -37,8 +37,8 @@ public class JDBCMatch {
 			while(rs.next()) {
 				int tableId = rs.getInt("tableID");
 				int clientId = rs.getInt("clientID");
-				int timeStamp = rs.getInt("timeStamp");
-				
+				Timestamp timeStamp = rs.getTimestamp("timeStamp");
+				matchList.add(new Match(tableId,clientId,timeStamp));
 			}
 			return matchList;
 		}catch(Exception e) {
