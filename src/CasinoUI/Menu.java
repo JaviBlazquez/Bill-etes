@@ -187,8 +187,67 @@ public class Menu {
 				userManager.removeUser(u); 
 		}
 	}
-	private static void croupierMenu(User u) {
-
+	private static void croupierMenu(User u) throws NumberFormatException, IOException {
+		boolean bucle1=true;
+		while(bucle1) {
+			System.out.println("Choose an option");
+			System.out.println("0. Return to login page");
+			System.out.println("1. Check salary");
+			System.out.println("2. Check client's state");
+			System.out.println("3. Check worker list");
+			System.out.println("4. Check shifts");
+			int choice = Integer.parseInt(readers.readLine());
+			JDBCWorker jdbcWorker= new JDBCWorker(jdbcManager);
+			List<Worker> workers= jdbcWorker.getListOfWorkers();
+			switch(choice)
+			{
+			case 0: 
+				bucle1=false;
+				break;
+			case 1:
+				Iterator<Worker> itW= workers.iterator();
+				while(itW.hasNext()) {
+					Worker w=itW.next();
+					if(w.getWorkerId()==u.getId()) {
+						System.out.println(w.getSalary());
+					}
+				}
+				break;
+			case 2: 
+				JDBCClient jdbcClient= new JDBCClient(jdbcManager);
+				String name, surname;
+				System.out.println("Introduce the client's name");
+				name = readers.readLine();
+				System.out.println("Introduce the client's surname");
+				surname = readers.readLine();
+				List<Client> clients= jdbcClient.getClientByQuery("SELECT condition FROM client WHERE name="+name+" AND surname="+ surname);
+				Iterator<Client> itC= clients.iterator();
+				while(itC.hasNext()) {
+					System.out.println(name+ " " + surname+ ": "+itC.next().isCondition());
+				}
+				break;
+			case 3:
+				jdbcWorker= new JDBCWorker(jdbcManager);
+				workers= jdbcWorker.getListOfWorkers();
+				Iterator<Worker> itW2= workers.iterator();
+				while(itW2.hasNext()) {
+					System.out.println(itW2.next());
+				}
+				break;
+			case 4: 
+				JDBCShift jdbcShift= new JDBCShift(jdbcManager);
+				List<Shift> shifts= jdbcShift.getListOfShifts();
+				Iterator<Shift> itS= shifts.iterator();
+				while(itS.hasNext()) {
+					Shift shift= itS.next();
+					if(shift.getCroupierId()==u.getId()) {
+						System.out.println("Timestamp: "+shift.getTimeStamp()+ " TableId: "+ shift.getTableId());
+					}
+				}
+				break;
+			}
+				
+		}
 		
 	}
 	private static void administrationMenu(User u) throws NumberFormatException, IOException {
