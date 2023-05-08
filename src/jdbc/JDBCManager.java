@@ -37,7 +37,7 @@ public class JDBCManager {
 				+ "croupier_id INTEGER,"
 				+ "table_id INTEGER,"
 				+ "fecha DATETIME,"
-				+ "FOREIGN KEY(croupier_id) REFERENCES croupier(croupier_id),"
+				+ "FOREIGN KEY(croupier_id) REFERENCES worker (worker_id),"
 				+ "FOREIGN KEY(table_id) REFERENCES casinotable(table_id)"
 				+ ");";
 		stmt.executeUpdate(sql);
@@ -82,8 +82,8 @@ public class JDBCManager {
 				+ "  phone INTEGER NOT NULL UNIQUE,"
 				+ "  name TEXT NOT NULL,"
 				+ "  surname TEXT NOT NULL,"
-				+ "  condition TEXT NOT NULL,"
-				+ "  client_id INTEGER NOT NULL UNIQUE AUTOINCREMENT,"
+				+ "  condition INTEGER NOT NULL,"
+				+ "  client_id INTEGER NOT NULL UNIQUE"
 				+ "  PRIMARY KEY(client_id)"
 				+ ");";
 		stmt.executeUpdate(sql);
