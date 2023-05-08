@@ -90,7 +90,7 @@ private EntityManager em;
 		// TODO Auto-generated method stub
 		User u = null;
 		
-		Query q = em.createNativeQuery("Select * from user where email =? AND password = ?", User.class);
+		Query q = em.createNativeQuery("Select * from users where email =? AND password = ?", User.class);
 		q.setParameter(1, email);
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");

@@ -18,7 +18,7 @@ public class JDBCClient implements ClientManager {
 	public void addClient(Client C) {
 		
 		try {
-			String sql = "INSERT INTO client (clientId,phone,money,name,surname,condition) VALUES(?,?,?,?,?,?)";
+			String sql = "INSERT INTO client (client_id,phone,money,name,surname,condition) VALUES(?,?,?,?,?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, C.getClientId());
 			prep.setInt(2,C.getPhone());

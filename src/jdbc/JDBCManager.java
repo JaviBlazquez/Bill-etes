@@ -80,6 +80,7 @@ public class JDBCManager {
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE client ("
 				+ "  phone INTEGER NOT NULL UNIQUE,"
+				+ "  money INTEGER,"
 				+ "  name TEXT NOT NULL,"
 				+ "  surname TEXT NOT NULL,"
 				+ "  condition INTEGER NOT NULL,"
