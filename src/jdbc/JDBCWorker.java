@@ -112,7 +112,7 @@ public class JDBCWorker implements WorkerManager{
 	public void removeWorker(Worker w) {
 		try {
 			String sql = "DELETE FROM worker"
-					+ "WHERE casinotable.worker_id = {?}";
+					+ "WHERE worker.worker_id = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, w.getWorkerId());
 		}catch(Exception e) {

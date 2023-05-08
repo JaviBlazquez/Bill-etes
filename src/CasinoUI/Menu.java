@@ -17,7 +17,7 @@ import jdbc.*;
 public class Menu {
 	private static final int casinoId= 0;
 	private static final int accountId= 0;
-	private Casino casino= new Casino(casinoId,accountId);
+	private static Casino casino= new Casino(casinoId,accountId);
 	private static BufferedReader readers = new BufferedReader (new InputStreamReader(System.in));
 	private static JDBCManager jdbcManager= new JDBCManager();
 	private static JPAUserManager userManager= new JPAUserManager();
@@ -114,7 +114,7 @@ public class Menu {
 				occupation= Occupation.ADMINISTRATION;
 			}
 		}
-		jdbcWorker.addWorker(new Worker(id, casinoId, name, surname, salary, address, occupation));
+		jdbcWorker.addWorker(new Worker(id, casino.getCasinoId(), name, surname, salary, address, occupation));
 		
 	}
 	private static boolean checkEmail(String email) {

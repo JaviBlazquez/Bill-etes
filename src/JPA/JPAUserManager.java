@@ -27,7 +27,7 @@ private EntityManager em;
 	public void connect() {
 		// TODO Auto-generated method stub
 		
-		em = Persistence.createEntityManagerFactory("casino.db").createEntityManager();
+		em = Persistence.createEntityManagerFactory("Billetes-provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
