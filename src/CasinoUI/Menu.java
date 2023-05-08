@@ -466,8 +466,13 @@ public class Menu {
 			System.out.println("Choose an option");
 			System.out.println("0. Return to login page");
 			System.out.println("1. Access a client info");
+			System.out.println("2. Check salary");
+			System.out.println("3. Check worker list");
+			System.out.println("4. Check shifts");
 			//System.out.println("2. Ban a client from the database");
 			int choice = Integer.parseInt(readers.readLine());
+			JDBCWorker jdbcWorker= new JDBCWorker(jdbcManager);
+			List<Worker> workers= jdbcWorker.getListOfWorkers();
 			switch(choice)
 			{
 			case 0: 
@@ -479,6 +484,35 @@ public class Menu {
 				email = readers.readLine();
 				User sus = userManager.getUserByEmail(email); //Que la función te diga el nombre apellido y si es ludo
 				removeUser(sus);
+				break;
+			case 2:
+				Iterator<Worker> itW= workers.iterator();
+				while(itW.hasNext()) {
+					Worker w=itW.next();
+					if(w.getWorkerId()==u.getId()) {
+						System.out.println(w.getSalary());
+					}
+				}
+				break;
+			case 3:
+				jdbcWorker= new JDBCWorker(jdbcManager);
+				workers= jdbcWorker.getListOfWorkers();
+				Iterator<Worker> itW2= workers.iterator();
+				while(itW2.hasNext()) {
+					System.out.println(itW2.next());
+				}
+				break;
+			case 4:
+				JDBCShift jdbcShift= new JDBCShift(jdbcManager);
+				List<Shift> shifts= jdbcShift.getListOfShifts();
+				Iterator<Shift> itS= shifts.iterator();
+				while(itS.hasNext()) {
+					Shift shift= itS.next();
+					if(shift.getCroupierId()==u.getId()) {
+						System.out.println("Timestamp: "+shift.getTimeStamp()+ " TableId: "+ shift.getTableId());
+					}
+				}
+				break;
 			}
 		}	
 	}
