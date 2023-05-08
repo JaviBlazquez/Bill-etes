@@ -403,7 +403,6 @@ public class Menu {
 	}
 	private static void securityMenu(User u) throws NumberFormatException, IOException {
 		boolean bucle1 = true;
-		JDBCClient cliente = new JDBCClient(jdbcManager);
 		while(bucle1) {
 			System.out.println("Choose an option");
 			System.out.println("0. Return to login page");
@@ -416,53 +415,14 @@ public class Menu {
 				bucle1=false;
 				break;
 			case 1:
-				
 				String email;
 				System.out.println("Introduce the client's email");
 				email = readers.readLine();
 				User sus = userManager.getUserByEmail(email); //Que la función te diga el nombre apellido y si es ludo
-				JDBCClient jdbcClient= new JDBCClient(jdbcManager);
-				List<Client> client= jdbcClient.getListofClient();
-				Iterator<Client> itC= client.iterator();
-				
-				while(itC.hasNext()) {
-					boolean a = false;
-					Client c=itC.next();
-					if(c.getClientId()==sus.getId()) {
-						jdbcClient.removeClient(c);
-						a = true;
-					}
-					if(a) {
-						
-					}
-				}
-					}
-				
-				System.out.println("Choose an option");
-				System.out.println("1. Delete Client");
-				System.out.println("2. Return to menu");
-				
-				int option = Integer.parseInt(readers.readLine());
-					switch(option) {
-					case 1:
-						
-						break;
-					case 2:
-						bucle1 = false;
-						break;
-						
-					
-					}
-				
-				break;
-			
-				
-				
+				removeUser(sus);
 			}
-			
-			
-			
-		}
+		}	
+	}
 		
 	
 		
@@ -497,6 +457,9 @@ public class Menu {
 					System.out.println("2. Extract money");
 					int choice2 = Integer.parseInt(readers.readLine());
 					switch(choice2) {
+					case 0:
+						bucle2=false;
+						break;
 					case 1:
 						int deposit = Integer.parseInt(readers.readLine());
 						Iterator<Client> itC2= client.iterator();
@@ -512,9 +475,13 @@ public class Menu {
 							while(itC3.hasNext()) {
 								Client c=itC.next();
 								if(c.getClientId()==u.getId()) {
-									if(c.getMoney()<extraction) {throw new MoneyException("It is not possible to extract that amount of money");}
+									if(c.getMoney()<extraction) {
+										throw new MoneyException("It is not possible to extract that amount of money");
+									}
 									c.setMoney(c.getMoney()-extraction);
-									bucle3=false;}}
+									bucle3=false;
+								}
+							}
 						}
 						
 						
@@ -529,6 +496,9 @@ public class Menu {
 					System.out.println("2. Match record");
 					int choice2 = Integer.parseInt(readers.readLine());
 					switch(choice2) {
+					case 0:
+						bucle2=false;
+						break;
 					case 1:
 						JDBCGame jdbcGame= new JDBCGame(jdbcManager);
 						List<Game> game= jdbcGame.getListOfGames();
