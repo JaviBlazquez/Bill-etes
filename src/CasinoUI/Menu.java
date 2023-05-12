@@ -65,7 +65,7 @@ public class Menu {
 		String password;
 		password= readers.readLine();
 		Role role= userManager.getRole("client");
-		User user= new User((Integer) userManager.getRole("client").getUsers().size(),email,password,role);
+		User user= new User(clientId,email,password,role);
 		userManager.newUser(user);
 		role.addUSer(user);
 		System.out.println("Introduce the client's name");
