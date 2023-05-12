@@ -16,7 +16,7 @@ public class JDBCGame implements GameManager{
 	public void addGame(Game g) {
 
 		try {
-			String sql = "INSERT INTO game (clientId, machineId, timeStamp) VALUES(?,?,?)";
+			String sql = "INSERT INTO game (client_id, machine_id, fecha) VALUES(?,?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, g.getClientId());
 			prep.setInt(2,g.getMachineId());
@@ -31,14 +31,14 @@ public class JDBCGame implements GameManager{
 	public List<Game> getListOfGames() {
 		List<Game> gameList = new LinkedList<Game>();
 		try {
-			String sql = "SELECT * FROM Game";
+			String sql = "SELECT * FROM game";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while(rs.next()) {
 				int gameId = rs.getInt("game_id");
 				int clientId = rs.getInt("client_id");
 				Timestamp timeStamp = rs.getTimestamp("fecha");
-				gameList.add(new Game(gameId,clientId,timeStamp));
+				gameList.add(new Game(clientId,gameId,timeStamp));
 			}
 			return gameList;
 		}catch(Exception e) {
@@ -52,7 +52,7 @@ public class JDBCGame implements GameManager{
 	public void removeGame(Game g) {
 		try {
 			String sql = "DELETE FROM game"
-					+ "WHERE game.gameId = {?}";
+					+ "WHERE game.game_id = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, g.getMachineId());
 		}catch(Exception e) {
@@ -65,8 +65,8 @@ public class JDBCGame implements GameManager{
 	@Override
 	public void updateGame(Game g) {
 		try {
-			String sql = "UPDATE game SET clientId, machineId, timeStamp = {?,?,?}"
-					+ "WHERE game.gameId = {?}";
+			String sql = "UPDATE game SET client_id, machine_id, fecha = {?,?,?}"
+					+ "WHERE game.game_id = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, g.getClientId());
 			prep.setInt(2, g.getMachineId());
