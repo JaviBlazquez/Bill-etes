@@ -17,7 +17,7 @@ public class JDBCMatch {
 	public void addMatch(Match m) {
 
 		try {
-			String sql = "INSERT INTO match (clientId, tableId, timeStamp) VALUES(?,?,?)";
+			String sql = "INSERT INTO matchs (client_id, table_id, fecha) VALUES(?,?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, m.getClientId());
 			prep.setInt(2,m.getTableId());
@@ -31,14 +31,14 @@ public class JDBCMatch {
 	public List<Match> getListOfMatches() {
 		List<Match> matchList = new LinkedList<Match>();
 		try {
-			String sql = "SELECT * FROM Match";
+			String sql = "SELECT * FROM matchs";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while(rs.next()) {
-				int tableId = rs.getInt("tableID");
-				int clientId = rs.getInt("clientID");
-				Timestamp timeStamp = rs.getTimestamp("timeStamp");
-				matchList.add(new Match(tableId,clientId,timeStamp));
+				int tableId = rs.getInt("table_id");
+				int clientId = rs.getInt("client_id");
+				Timestamp timeStamp = rs.getTimestamp("fecha");
+				matchList.add(new Match(clientId,tableId,timeStamp));
 			}
 			return matchList;
 		}catch(Exception e) {
@@ -51,8 +51,8 @@ public class JDBCMatch {
 
 	public void removeMatch(Match m) {
 		try {
-			String sql = "DELETE FROM match"
-					+ "WHERE table.tableId = {?}";
+			String sql = "DELETE FROM matchs"
+					+ "WHERE table.table_id = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, m.getTableId());
 		}catch(Exception e) {
@@ -65,8 +65,8 @@ public class JDBCMatch {
 
 	public void updateMatch(Match m) {
 		try {
-			String sql = "UPDATE game SET clientId, tableId, timeStamp = {?,?,?}"
-					+ "WHERE game.gameId = {?}";
+			String sql = "UPDATE matchs SET client_id, table_id, timeStamp = {?,?,?}"
+					+ "WHERE matchs.match_id = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, m.getClientId());
 			prep.setInt(2, m.getTableId());
