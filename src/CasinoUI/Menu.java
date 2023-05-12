@@ -559,8 +559,14 @@ public class Menu {
 						Iterator<Client> itC2= client.iterator();
 						while(itC2.hasNext()) {
 							Client c=itC2.next();
+							System.out.println(u.getId());
+							System.out.println(deposit);
 							if(c.getClientId()==u.getId()) {
+								System.out.println(c.getMoney());
 								c.setMoney(c.getMoney()+deposit);
+								System.out.println(c.getMoney());
+								jdbcClient.updateClient(c);
+								System.out.println("Deposit done");
 								}}break;
 					case 2:
 							System.out.println("Introduce extraction");

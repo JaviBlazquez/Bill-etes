@@ -43,7 +43,7 @@ public class JDBCClient implements ClientManager {
 	}
 	public void updateClient(Client C) {
 		try {
-			String sql = "UPDATE client SET phone,money,name,surname,condition = {?,?,?,?,?}"
+			String sql = "UPDATE client SET phone, money, name, surname, condition = {?,?,?,?,?}"
 					+ "WHERE client.clientId = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, C.getPhone());
