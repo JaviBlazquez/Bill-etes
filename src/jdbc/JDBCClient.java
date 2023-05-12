@@ -106,9 +106,9 @@ public class JDBCClient implements ClientManager {
 			PreparedStatement prep = manager.getConnection().prepareStatement(query);
 			ResultSet rs= prep.executeQuery();
 			ResultSetMetaData rsmeta= rs.getMetaData();
-			Integer clientId=null;
-			Integer phone=null;	
-			Float money=null;
+			Integer clientId=0;
+			Integer phone=0;	
+			Float money=(float) 0;
 			String name=null;
 			String surname=null;
 			Boolean condition=null;
