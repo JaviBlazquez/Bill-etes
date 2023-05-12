@@ -35,9 +35,9 @@ public class JDBCGame implements GameManager{
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while(rs.next()) {
-				int gameId = rs.getInt("gameID");
-				int clientId = rs.getInt("clientID");
-				Timestamp timeStamp = rs.getTimestamp("timeStamp");
+				int gameId = rs.getInt("game_id");
+				int clientId = rs.getInt("client_id");
+				Timestamp timeStamp = rs.getTimestamp("fecha");
 				gameList.add(new Game(gameId,clientId,timeStamp));
 			}
 			return gameList;
