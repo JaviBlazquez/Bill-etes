@@ -18,7 +18,7 @@ public JDBCShift(JDBCManager m) {
 
 public void addShift(Shift s) {
 	try {
-		String sql = "INSERT INTO shift (tableId, croupierId, timeStamp) VALUES(?,?,?)";
+		String sql = "INSERT INTO shift (table_id, croupier_id, fecha) VALUES(?,?,?)";
 		PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 		prep.setInt(1, s.getTableId());
 		prep.setInt(2, s.getCroupierId());

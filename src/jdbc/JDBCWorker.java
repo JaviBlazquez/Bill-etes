@@ -47,7 +47,7 @@ public class JDBCWorker implements WorkerManager{
 				String name = rs.getString("name");
 				String surname = rs.getString("surname");
 				float salary = rs.getFloat("salary");
-				String addres = rs.getString("addres");
+				String addres = rs.getString("address");
 				Occupation occupation;
 				switch(rs.getString("occupation")) {
 					case "Security":{
