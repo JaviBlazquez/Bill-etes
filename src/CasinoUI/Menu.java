@@ -554,32 +554,32 @@ public class Menu {
 						bucle2=false;
 						break;
 					case 1:
+						System.out.println("Introduce deposit");
 						int deposit = Integer.parseInt(readers.readLine());
 						Iterator<Client> itC2= client.iterator();
 						while(itC2.hasNext()) {
 							Client c=itC2.next();
 							if(c.getClientId()==u.getId()) {
-								c.setMoney(c.getMoney()-deposit);
-								bucle3=false;}}
+								c.setMoney(c.getMoney()+deposit);
+								}}break;
 					case 2:
-						while(bucle3) {
+							System.out.println("Introduce extraction");
 							int extraction = Integer.parseInt(readers.readLine());
 							Iterator<Client> itC3= client.iterator();
 							while(itC3.hasNext()) {
-								Client c=itC.next();
+								Client c=itC3.next();
 								if(c.getClientId()==u.getId()) {
 									if(c.getMoney()<extraction) {
 										throw new MoneyException("It is not possible to extract that amount of money");
 									}
 									c.setMoney(c.getMoney()-extraction);
-									bucle3=false;
 								}
 							}
-						}
+						break;
 						
 						
 					}
-					}
+					}break;
 			case 2:
 				bucle2=true;
 				while(bucle2) {
