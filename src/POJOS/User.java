@@ -28,7 +28,7 @@ public class User implements Serializable {
 	private Integer id;
 	private String email;
 	@Lob
-	private byte[] password;
+	private String password;
 	@ManyToOne
 	@JoinColumn (name = "role_id")
 	private Role role;
@@ -37,7 +37,7 @@ public class User implements Serializable {
 	public User() {
 		super(); 
 	}
-	public User(Integer id, String email, byte[] password, Role role) {
+	public User(Integer id, String email, String password, Role role) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -56,10 +56,10 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public byte[] getPassword() {
+	public String getPassword() {
 		return password;
 	}
-	public void setPassword(byte[] password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	public Role getRole() {
@@ -72,7 +72,7 @@ public class User implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + Arrays.hashCode(password);
+		result = prime * result + Objects.hash(password);
 		result = prime * result + Objects.hash(email, id, role);
 		return result;
 	}
@@ -86,7 +86,7 @@ public class User implements Serializable {
 			return false;
 		User other = (User) obj;
 		return Objects.equals(email, other.email) && Objects.equals(id, other.id)
-				&& Arrays.equals(password, other.password) && Objects.equals(role, other.role);
+				&& Objects.equals(password, other.password) && Objects.equals(role, other.role);
 	}
 
 	

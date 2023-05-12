@@ -81,7 +81,7 @@ public class JDBCClient implements ClientManager {
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			ResultSet rs= prep.executeQuery();
 			while(rs.next()) {
-				int clientId = rs.getInt("clientId");
+				int clientId = rs.getInt("client_id");
 				int phone=rs.getInt("phone");
 				float money=rs.getFloat("money");
 				String name = rs.getString("name");
