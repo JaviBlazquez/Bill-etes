@@ -298,7 +298,7 @@ public class Menu {
 							name = readers.readLine();
 							System.out.println("Introduce the client's surname");
 							surname = readers.readLine();
-							List<Client> clients= jdbcClient.getClientByQuery("SELECT condition FROM client WHERE name="+name+" AND surname="+ surname);
+							List<Client> clients= jdbcClient.getClientByQuery("SELECT condition FROM client WHERE name=\""+name+"\" AND surname=\""+ surname+"\"");
 							Iterator<Client> itC= clients.iterator();
 							while(itC.hasNext()) {
 								System.out.println(name+ " " + surname+ ": "+itC.next().isCondition());
