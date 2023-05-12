@@ -44,7 +44,7 @@ public class JDBCClient implements ClientManager {
 	public void updateClient(Client C) {
 		try {
 			String sql = "UPDATE client SET phone,money,name,surname,condition = {?,?,?,?,?}"
-					+ "WHERE client.clientId = {?}";
+					+ "WHERE client.client_id = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, C.getPhone());
 			prep.setFloat(2, C.getMoney());
@@ -60,7 +60,7 @@ public class JDBCClient implements ClientManager {
 	public void updateClient(Client C, int id) {
 		try {
 			String sql = "UPDATE client SET phone,money,name,surname,condition,client_id = {?,?,?,?,?,?}"
-					+ "WHERE client.clientId = {?}";
+					+ "WHERE client.client_id = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, C.getPhone());
 			prep.setFloat(2, C.getMoney());

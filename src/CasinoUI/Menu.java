@@ -346,6 +346,7 @@ public class Menu {
 				}
 				break;
 			case 2:
+				bucle3=true;
 				while(bucle3) {
 					System.out.println("Choose an option");
 					System.out.println("0. Return to previus page");
@@ -627,7 +628,7 @@ public class Menu {
 		try {
 			do {
 				System.out.println("Choose an option");
-				System.out.println("0. exit");
+				System.out.println("0. Exit");
 				System.out.println("1. Login");
 				System.out.println("2. Register as a new client");
 				
