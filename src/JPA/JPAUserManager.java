@@ -92,14 +92,15 @@ private EntityManager em;
 		
 		Query q = em.createNativeQuery("Select * from users where email =? AND password = ?", User.class);
 		q.setParameter(1, email);
-		try {
+		q.setParameter(2, passwd);
+		/*try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(passwd.getBytes());
 			byte[] digest = md.digest();
 			q.setParameter(2,digest);
 		}catch(NoSuchAlgorithmException e){
 			e.printStackTrace();
-		}
+		}*/
 		
 		try {
 			u = (User) q.getSingleResult();

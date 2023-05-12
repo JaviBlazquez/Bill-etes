@@ -62,8 +62,8 @@ public class Menu {
 			email = readers.readLine();
 		}while(!checkEmail(email));
 		System.out.println("Introduce the client's password");
-		byte[] password = new byte[10];
-		password[0]=Byte.parseByte( readers.readLine());
+		String password;
+		password= readers.readLine();
 		Role role= userManager.getRole("client");
 		User user= new User((Integer) userManager.getRole("client").getUsers().size(),email,password,role);
 		userManager.newUser(user);
@@ -79,7 +79,7 @@ public class Menu {
 	private static void registerWorker() throws IOException {
 		String email, role_string, name, surname, address;
 		int salary;
-		byte[] password = new byte[10];
+		String password;
 		JDBCWorker jdbcWorker= new JDBCWorker(jdbcManager);
 		Occupation occupation;
 		do {
@@ -87,7 +87,7 @@ public class Menu {
 			email = readers.readLine();
 		}while(!checkEmail(email));
 		System.out.println("Introduce the worker's password");
-		password[0]=Byte.parseByte( readers.readLine());
+		password=readers.readLine();
 		System.out.println("Introduce the worker's role");
 		role_string = readers.readLine();
 		Role role= userManager.getRole(role_string);
@@ -557,7 +557,7 @@ public class Menu {
 						int deposit = Integer.parseInt(readers.readLine());
 						Iterator<Client> itC2= client.iterator();
 						while(itC2.hasNext()) {
-							Client c=itC.next();
+							Client c=itC2.next();
 							if(c.getClientId()==u.getId()) {
 								c.setMoney(c.getMoney()-deposit);
 								bucle3=false;}}
