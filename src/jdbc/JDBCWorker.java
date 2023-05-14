@@ -73,8 +73,7 @@ public class JDBCWorker implements WorkerManager{
 	@Override
 	public void updateWorker(Worker w) {
 		try {
-			String sql = "UPDATE worker SET name, surname, salary, addres, occupation = {?,?,?,?,?}"
-					+ "WHERE worker.workerId = {?}";
+			String sql = "UPDATE worker SET name = ?, surname = ?, salary = ?, addres = ?, occupation = ? WHERE worker.workerId = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, w.getName());
 			prep.setString(2, w.getSurname());
@@ -91,8 +90,7 @@ public class JDBCWorker implements WorkerManager{
 	
 	public void updateWorker(Worker w, int id) {
 		try {
-			String sql = "UPDATE worker SET name, surname, salary, addres, occupation = {?,?,?,?,?,?}"
-					+ "WHERE worker.workerId = {?}";
+			String sql = "UPDATE worker SET name = ?, surname = ?, salary = ?, addres = ?, occupation = ? WHERE worker.workerId = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, w.getName());
 			prep.setString(2, w.getSurname());

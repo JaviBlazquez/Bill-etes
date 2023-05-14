@@ -54,7 +54,7 @@ public List<Shift> getListOfShifts() {
 
 public void updateShift(Shift s) {
 	try {
-		String sql = "UPDATE Shift SET tableId, croupierId, timeStamp, = {?,?,?}";
+		String sql = "UPDATE Shift SET tableId = ?, croupierId = ?, timeStamp = ?";
 		PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 		prep.setInt(1, s.getTableId());
 		prep.setInt(2, s.getCroupierId());
