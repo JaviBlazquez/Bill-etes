@@ -31,10 +31,5 @@ public class XMLClientManagerImpl implements XMLClientManager {
 		return null;
 	}
 
-	@Override
-	public void clientToHtml(Client c) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

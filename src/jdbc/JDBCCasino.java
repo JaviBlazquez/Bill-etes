@@ -16,7 +16,7 @@ public class JDBCCasino implements CasinoManager{
 	public void addCasino(Casino C) {
 		
 		try {
-			String sql = "INSERT INTO casino (casinoID,accountID) VALUES(?,?)";
+			String sql = "INSERT INTO casino (casino_id,account_id) VALUES(?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, C.getCasinoId());
 			prep.setInt(2,C.getCasinoId());
@@ -28,7 +28,7 @@ public class JDBCCasino implements CasinoManager{
 	public void removeClient(Casino C) {
 		try {
 			String sql = "DELETE FROM casino"
-					+ "WHERE casino.casinoID = {?}";
+					+ "WHERE casino.casino_id = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1,C.getCasinoId());
 		}catch(Exception e) {
@@ -37,8 +37,8 @@ public class JDBCCasino implements CasinoManager{
 	}
 	public void updateCasino(Casino C) {
 		try {
-			String sql = "UPDATE casino SET accountID = {?}"
-					+ "WHERE client.clientId = {?}";
+			String sql = "UPDATE casino SET account_id = {?}"
+					+ "WHERE client.client_id = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, C.getAccountId());
 			prep.executeUpdate();
@@ -53,8 +53,8 @@ public class JDBCCasino implements CasinoManager{
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			ResultSet rs= prep.executeQuery();
 			while(rs.next()) {
-				int casinoId = rs.getInt("casinoID");
-				int accountId=rs.getInt("accountID");
+				int casinoId = rs.getInt("casino_id");
+				int accountId=rs.getInt("account_id");
 				Casino C= new Casino(casinoId,accountId);
 				casinoList.add(C);
 			}
@@ -64,8 +64,21 @@ public class JDBCCasino implements CasinoManager{
 		}
 		return casinoList;
 	}
+	
 	public Casino getCasino() {
-		
+		try {
+			String sql = "SELECT * FROM casino";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			ResultSet rs= prep.executeQuery();
+			while(rs.next()) {
+				int casinoId = rs.getInt("casino_id");
+				int accountId=rs.getInt("account_id");
+				Casino C= new Casino(casinoId,accountId);
+				return C;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 }
 	}

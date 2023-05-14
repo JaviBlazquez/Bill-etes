@@ -2,6 +2,7 @@
 package POJOS;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -14,19 +15,12 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Casino")
-@XmlType(propOrder = {"worker"})
+@XmlType(propOrder = {"workers"})
 public class Casino implements Serializable{
 	
 	
 
-	public List<Worker> getWorkers() {
-		return workers;
-	}
-
-	public void setWorkers(List<Worker> workers) {
-		this.workers = workers;
-	}
-
+	
 	
 	/**
 	 * 
@@ -40,9 +34,15 @@ public class Casino implements Serializable{
 	@XmlElementWrapper(name = "Workers")
 	private List<Worker> workers;
 	
+	public Casino() {
+		super();
+		workers = new LinkedList<>();
+	}
+	
 	public Casino (int casinoId, int accountId) {
 		this.casinoId = casinoId;
 		this.accountId = accountId;
+		workers = new LinkedList<>();
 	}
 
 	public int getCasinoId() {
@@ -60,6 +60,15 @@ public class Casino implements Serializable{
 	public void setAccountId(int accountId) {
 		this.accountId = accountId;
 	}
+	
+    public List<Worker> getWorkers() {
+		return workers;
+	}
+
+	public void setWorkers(List<Worker> workers) {
+		this.workers = workers;
+	}
+
 
 	@Override
 	public String toString() {
