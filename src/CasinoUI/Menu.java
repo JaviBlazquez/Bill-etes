@@ -1,5 +1,6 @@
 package CasinoUI;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Timestamp;
@@ -261,7 +262,7 @@ public class Menu {
 			System.out.println("Choose an option");
 			System.out.println("0. Return to login page");
 			System.out.println("1. Check database info");
-			System.out.println("2. Print my data");
+			System.out.println("2. Print casino data");
 			System.out.println("3. Modify database info");
 			int choice = Integer.parseInt(readers.readLine());
 			switch(choice)
@@ -363,9 +364,10 @@ public class Menu {
 					System.out.println("Choose an option");
 					System.out.println("0. Return to previus page");
 					System.out.println("1. Client's state");
-					System.out.println("2. Bancary account");
-					System.out.println("3. Worker");
-					System.out.println("4. Create shift");
+					System.out.println("2. Load a client");
+					System.out.println("3. Bancary account");
+					System.out.println("4. Worker");
+					System.out.println("5. Create shift");
 					choice= Integer.parseInt(readers.readLine());
 					switch(choice) {
 						case 0: 
@@ -387,6 +389,9 @@ public class Menu {
 							jdbcClient.updateClient(client);
 							break;
 						case 2:
+							loadClient();
+							break;
+						case 3:
 							float money;
 							System.out.println("Introduce the new ammount of money");
 							money = Float.parseFloat(readers.readLine());
@@ -395,7 +400,7 @@ public class Menu {
 							bancaryAccount.setMoney(money);
 							jdbcBancaryAccount.updateBancaryAccount(bancaryAccount);
 							break;
-						case 3:
+						case 4:
 							boolean bucle4= true;
 							while(bucle4) {
 								JDBCWorker jdbcWorker= new JDBCWorker(jdbcManager);
@@ -447,7 +452,7 @@ public class Menu {
 									}
 							}
 							break;
-						case 4:
+						case 5:
 							JDBCShift jdbcShift= new JDBCShift(jdbcManager);
 							System.out.println("Introduce workerId");
 							Integer workerId= Integer.parseInt(readers.readLine());
@@ -472,6 +477,14 @@ public class Menu {
 			}
 		}
 		
+	}
+	
+	private static void loadClient() {
+		Client c = null;
+		File file = new File("./xmls/External-Client.xml");
+		c = xmlclientmanager.xmlToClient(file);
+		
+		System.out.println(c);
 	}
 	
 	private static void printMe(Casino cas) {
