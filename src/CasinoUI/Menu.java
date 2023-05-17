@@ -80,6 +80,15 @@ public class Menu {
 		phone = Integer.parseInt(readers.readLine());
 		jdbcclient.addClient(new Client(clientId, phone, 0, name, surname, false));
 	}
+	private static void registerClient(Client c) throws IOException {
+		JDBCClient jdbcclient= new JDBCClient(jdbcManager);
+		Integer clientId= (Integer) userManager.getRole("client").getUsers().size();
+		Role role= userManager.getRole("client");
+		User user= new User(clientId,c.getName()+"@.com", ""+c.getPhone(),role);
+		userManager.newUser(user);
+		role.addUSer(user);
+		jdbcclient.addClient(new Client(clientId, c.getPhone(), c.getMoney(), c.getName(), c.getSurname(), c.isCondition()));
+	}
 	private static void registerWorker() throws IOException {
 		String email, role_string, name, surname, address;
 		int salary;
@@ -479,10 +488,10 @@ public class Menu {
 		
 	}
 	
-	private static void loadClient() {
-		Client c = null;
+	private static void loadClient() throws IOException {
 		File file = new File("./xmls/External-Client.xml");
-		xmlclientmanager.xmlToClient(file);
+		Client c= xmlclientmanager.xmlToClient(file);
+		registerClient(c);
 	}
 	
 	private static void printMe(Casino cas) {
