@@ -32,8 +32,7 @@ public class JDBCMachine implements MachineManager{
 	@Override
 	public void removeMachine(Machine M) {
 		try {
-			String sql = "DELETE FROM machine"
-					+ "WHERE machine.machine_id = {?}";
+			String sql = "DELETE FROM machine WHERE machine.machine_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, M.getMachineId());
 		}catch(Exception e) {

@@ -9,44 +9,44 @@ public class Match implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 176087543364843395L;
-	private int clientId;
-	private int tableId;
-	private Timestamp timeStamp;
+	private int client_id;
+	private int table_id;
+	private Timestamp fecha;
 	
 	public Match(int clientId, int tableId, Timestamp timeStamp) {
 		super();
-		this.clientId = clientId;
-		this.tableId = tableId;
-		this.timeStamp = timeStamp;
+		this.client_id = clientId;
+		this.table_id = tableId;
+		this.fecha = timeStamp;
 	}
 
 	public int getClientId() {
-		return clientId;
+		return client_id;
 	}
 
 	public void setClientId(int clientId) {
-		this.clientId = clientId;
+		this.client_id = clientId;
 	}
 
 	public int getTableId() {
-		return tableId;
+		return table_id;
 	}
 
 	public void setTableId(int tableId) {
-		this.tableId = tableId;
+		this.table_id = tableId;
 	}
 
 	public Timestamp getTimeStamp() {
-		return timeStamp;
+		return fecha;
 	}
 
 	public void setTimeStamp(Timestamp timeStamp) {
-		this.timeStamp = timeStamp;
+		this.fecha = timeStamp;
 	}
 
 	@Override
 	public String toString() {
-		return "Match [clientId=" + clientId + ", tableId=" + tableId + ", timeStamp=" + timeStamp + "]";
+		return "Match [clientId=" + client_id + ", tableId=" + table_id + ", timeStamp=" + fecha + "]";
 	}
 	
 	

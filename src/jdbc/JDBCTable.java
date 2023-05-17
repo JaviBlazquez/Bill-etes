@@ -52,8 +52,7 @@ public class JDBCTable implements TableManager{
 	@Override
 	public void removeTable(Table T) {
 		try {
-			String sql = "DELETE FROM casinotable"
-					+ "WHERE casinotable.table_id = {?}";
+			String sql = "DELETE FROM casinotable WHERE casinotable.table_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, T.getTableId());
 		}catch(Exception e) {

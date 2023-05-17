@@ -8,9 +8,9 @@ public class Machine implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -6981898793485992283L;
-	private int machineId;
-	private String machineName;
-	private float moneyWon;
+	private int machine_id;
+	private String name;
+	private float money_won;
 	
 	
 	public Machine(int _machineId, String _machineName, float _moneyWon) {
@@ -20,27 +20,27 @@ public class Machine implements Serializable{
 	}
 	
 	public int getMachineId() {
-		return machineId;
+		return machine_id;
 	}
 	public void setMachineId(int machineId) {
-		this.machineId = machineId;
+		this.machine_id = machineId;
 	}
 	public String getMachineName() {
-		return machineName;
+		return name;
 	}
 	public void setMachineName(String machineName) {
-		this.machineName = machineName;
+		this.name = machineName;
 	}
 	public float getMoneyWon() {
-		return moneyWon;
+		return money_won;
 	}
 	public void setMoneyWon(float moneyWon) {
-		this.moneyWon = moneyWon;
+		this.money_won = moneyWon;
 	}
 
 	@Override
 	public String toString() {
-		return "Machine [machineId=" + machineId + ", machineName=" + machineName + ", moneyWon=" + moneyWon + "]";
+		return "Machine [machine_id=" + machine_id + ", name=" + name + ", money_won=" + money_won + "]";
 	}
 	
 	

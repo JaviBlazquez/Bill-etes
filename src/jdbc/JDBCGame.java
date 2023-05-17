@@ -51,8 +51,7 @@ public class JDBCGame implements GameManager{
 	@Override
 	public void removeGame(Game g) {
 		try {
-			String sql = "DELETE FROM game"
-					+ "WHERE game.game_id = {?}";
+			String sql = "DELETE FROM game WHERE game.game_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, g.getMachineId());
 		}catch(Exception e) {

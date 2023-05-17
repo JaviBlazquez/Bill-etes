@@ -1,3 +1,11 @@
+<!DOCTYPE Client [
+         <!ELEMENT Client (phone,money,condition)>
+         <!ATTLIST Client name CDATA #REQUIRED>
+         <!ATTLIST Client surname CDATA #REQUIRED>
+         <!ELEMENT phone (#PCDATA)>
+         <!ELEMENT money (#PCDATA)>
+         <!ELEMENT condition (#PCDATA)>
+       ]>
 <Client name="pedro" surname="pascal">
     <phone>63242</phone>
     <money>10000.0</money>

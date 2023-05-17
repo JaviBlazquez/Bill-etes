@@ -8,7 +8,7 @@ public class BancaryAccount implements Serializable{
 	 */
 	private static final long serialVersionUID = -9025335208651977334L;
 	private float money;
-	private int accountId;
+	private int account_id;
 	
 	public BancaryAccount(int _id,float _money){
 		this.setAccountId(_id);
@@ -23,14 +23,14 @@ public class BancaryAccount implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "BancaryAccount [money=" + money + ", accountId=" + accountId + "]";
+		return "BancaryAccount [money=" + money + ", account_id=" + account_id + "]";
 	}
 
 	public int getAccountId() {
-		return accountId;
+		return account_id;
 	}
 	public void setAccountId(int accountId) {
-		this.accountId = accountId;
+		this.account_id = accountId;
 	}
 	
 	

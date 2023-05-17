@@ -111,8 +111,7 @@ public class JDBCWorker implements WorkerManager{
 	@Override
 	public void removeWorker(Worker w) {
 		try {
-			String sql = "DELETE FROM worker"
-					+ "WHERE worker.worker_id = {?}";
+			String sql = "DELETE FROM worker WHERE worker.worker_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, w.getWorkerId());
 		}catch(Exception e) {
