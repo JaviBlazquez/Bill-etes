@@ -34,7 +34,7 @@ public class JDBCClient implements ClientManager {
 	public void removeClient(Client C) {
 		try {
 			String sql = "DELETE FROM client"
-					+ "WHERE client.clientId = {?}";
+					+ "WHERE client.client_id = {?}";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1,C.getClientId());
 		}catch(Exception e) {
