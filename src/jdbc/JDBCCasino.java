@@ -27,8 +27,7 @@ public class JDBCCasino implements CasinoManager{
 	}
 	public void removeClient(Casino C) {
 		try {
-			String sql = "DELETE FROM casino"
-					+ "WHERE casino.casino_id = {?}";
+			String sql = "DELETE FROM casino WHERE casino.casino_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1,C.getCasinoId());
 		}catch(Exception e) {

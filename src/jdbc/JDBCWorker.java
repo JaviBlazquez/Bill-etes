@@ -19,7 +19,7 @@ public class JDBCWorker implements WorkerManager{
 	@Override
 	public void addWorker(Worker w) {
 		try {
-			String sql = "INSERT INTO worker (worker_id, casino_id, name, surname, salary, addres, occupation) VALUES(?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO worker (worker_id, casino_id, name, surname, salary, address, occupation) VALUES(?,?,?,?,?,?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, w.getWorkerId());
 			prep.setInt(2, w.getCasinoId());
@@ -75,7 +75,7 @@ public class JDBCWorker implements WorkerManager{
 	@Override
 	public void updateWorker(Worker w) {
 		try {
-			String sql = "UPDATE worker SET name = ?, surname = ?, salary = ?, addres = ?, occupation = ? WHERE worker.worker_id = ?";
+			String sql = "UPDATE worker SET name = ?, surname = ?, salary = ?, address = ?, occupation = ? WHERE worker.worker_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, w.getName());
 			prep.setString(2, w.getSurname());
@@ -92,7 +92,7 @@ public class JDBCWorker implements WorkerManager{
 	
 	public void updateWorker(Worker w, int id) {
 		try {
-			String sql = "UPDATE worker SET name = ?, surname = ?, salary = ?, addres = ?, occupation = ? WHERE worker.worker_id = ?";
+			String sql = "UPDATE worker SET name = ?, surname = ?, salary = ?, address = ?, occupation = ? WHERE worker.worker_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, w.getName());
 			prep.setString(2, w.getSurname());
@@ -159,7 +159,7 @@ public class JDBCWorker implements WorkerManager{
 							salary= rs.getFloat(i);
 							break;
 						}
-						case "addres":{
+						case "address":{
 							addres= rs.getString(i);
 							break;
 						}

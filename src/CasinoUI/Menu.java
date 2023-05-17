@@ -144,12 +144,12 @@ public class Menu {
 				Iterator<Client> itC= clients.iterator();
 				while(itC.hasNext()) {
 					Client client= itC.next();
+					if(u.getId()==client.getClientId()) {
+						jdbcClient.removeClient(client);
+					}
 					if(u.getId()<client.getClientId()) {
 						client.setClientId(client.getClientId()-1);
 						jdbcClient.updateClient(client, client.getClientId()+1);
-					}
-					if(u.getId()==client.getClientId()) {
-						jdbcClient.removeClient(client);
 					}
 				}
 				List<User> usersC=u.getRole().getUsers();
