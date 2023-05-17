@@ -27,9 +27,9 @@ public class Casino implements Serializable{
 	 */
 	private static final long serialVersionUID = -9197997725060790303L;
 	@XmlTransient
-	private int casinoId;
+	private int casino_id;
 	@XmlTransient
-	private int accountId;
+	private int account_id;
 	@XmlElement(name = "worker")
 	@XmlElementWrapper(name = "Workers")
 	private List<Worker> workers;
@@ -40,25 +40,25 @@ public class Casino implements Serializable{
 	}
 	
 	public Casino (int casinoId, int accountId) {
-		this.casinoId = casinoId;
-		this.accountId = accountId;
+		this.casino_id = casinoId;
+		this.account_id = accountId;
 		workers = new LinkedList<>();
 	}
 
 	public int getCasinoId() {
-		return casinoId;
+		return casino_id;
 	}
 
 	public void setCasinoId(int casinoId) {
-		this.casinoId = casinoId;
+		this.casino_id = casinoId;
 	}
 
 	public int getAccountId() {
-		return accountId;
+		return account_id;
 	}
 
 	public void setAccountId(int accountId) {
-		this.accountId = accountId;
+		this.account_id = accountId;
 	}
 	
     public List<Worker> getWorkers() {
@@ -72,7 +72,7 @@ public class Casino implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Casino [casinoId=" + casinoId + ", accountId=" + accountId + ", workers=" + workers + "]";
+		return "Casino [casino_id=" + casino_id + ", account_id=" + account_id + ", workers=" + workers + "]";
 	}
 	
 	

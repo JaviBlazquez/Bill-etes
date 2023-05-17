@@ -21,7 +21,7 @@ public class Client implements Serializable{
 	
 	
 	@XmlTransient
-	private int clientId;
+	private int client_id;
 	@XmlElement
 	private int phone;
 	@XmlElement
@@ -39,7 +39,7 @@ public class Client implements Serializable{
 	
 	public Client(int clientId, int phone, float money, String name, String surname, boolean condition) {
 		
-		this.clientId = clientId;
+		this.client_id = clientId;
 		this.phone = phone;
 		this.money = money;
 		this.name = name;
@@ -47,10 +47,10 @@ public class Client implements Serializable{
 		this.condition = condition;
 	}
 	public int getClientId() {
-		return clientId;
+		return client_id;
 	}
 	public void setClientId(int clientId) {
-		this.clientId = clientId;
+		this.client_id = clientId;
 	}
 	public int getPhone() {
 		return phone;
@@ -84,7 +84,7 @@ public class Client implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Client [clientId=" + clientId + ", phone=" + phone + ", money=" + money + ", name=" + name
+		return "Client [client_id=" + client_id + ", phone=" + phone + ", money=" + money + ", name=" + name
 				+ ", surname=" + surname + ", condition=" + condition + "]";
 	}
 		

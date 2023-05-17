@@ -51,8 +51,7 @@ public class JDBCMatch {
 
 	public void removeMatch(Match m) {
 		try {
-			String sql = "DELETE FROM matchs"
-					+ "WHERE table.table_id = {?}";
+			String sql = "DELETE FROM matchs WHERE table.table_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, m.getTableId());
 		}catch(Exception e) {
