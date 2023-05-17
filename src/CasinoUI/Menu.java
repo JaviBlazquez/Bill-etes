@@ -482,9 +482,7 @@ public class Menu {
 	private static void loadClient() {
 		Client c = null;
 		File file = new File("./xmls/External-Client.xml");
-		c = xmlclientmanager.xmlToClient(file);
-		
-		System.out.println(c);
+		xmlclientmanager.xmlToClient(file);
 	}
 	
 	private static void printMe(Casino cas) {
