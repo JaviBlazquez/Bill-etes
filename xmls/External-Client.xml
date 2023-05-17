@@ -1,0 +1,5 @@
+<Client name="pedro" surname="pascal">
+    <phone>63242</phone>
+    <money>10000.0</money>
+    <condition>false</condition>
+</Client>

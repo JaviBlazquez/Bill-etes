@@ -16,5 +16,10 @@
             <addres>calle 3</addres>
             <Occupation>ADMINISTRATION</Occupation>
         </worker>
+        <worker name="Eustaqueo" surname="Habichuela">
+            <salary>2000.0</salary>
+            <addres>calle 4</addres>
+            <Occupation>ADMINISTRATION</Occupation>
+        </worker>
     </Workers>
 </Casino>

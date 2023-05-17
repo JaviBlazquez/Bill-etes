@@ -31,7 +31,7 @@ public class XMLClientManagerImpl implements XMLClientManager {
 	}
 
 	@Override
-	public Client xmlToClient(File xml) {
+	public void xmlToClient(File xml) {
 		Client c = null;
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Client.class);
@@ -51,7 +51,6 @@ public class XMLClientManagerImpl implements XMLClientManager {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return c;
 	}
 
 

@@ -8,5 +8,5 @@ import POJOS.Client;
 public interface XMLClientManager {
 
 	public void clientToXml(Client c);
-	public Client xmlToClient(File xml);
+	public void xmlToClient(File xml);
 }

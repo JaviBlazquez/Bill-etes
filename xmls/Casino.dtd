@@ -1,0 +1,10 @@
+<!DOCTYPE Casino [
+            <!ELEMENT Casino ( workers)>
+            <!ATTLIST Casino name CDATA #REQUIRED
+            <!ELEMENT workers (workers+)>
+            <!ELEMENT Workers ( salary, addres, occupation)>
+            <!ATTLIST Workers name CDATA #REQUIRED>
+                      <!ELEMENT salary (#PCDATA)>
+                      <!ELEMENT addres (#PCDATA)>
+                      <!ELEMENT occupation (#PCDATA)>
+         ]>
