@@ -50,11 +50,13 @@ public class JDBCWorker implements WorkerManager{
 				String addres = rs.getString("address");
 				Occupation occupation;
 				switch(rs.getString("occupation")) {
-					case "Security":{
+					case "security":{
 						occupation= Occupation.SECURITY;
+						break;
 					}
-					case "Croupier":{
+					case "croupier":{
 						occupation= Occupation.CROUPIER;
+						break;
 					}
 					default:{
 						occupation= Occupation.ADMINISTRATION;
