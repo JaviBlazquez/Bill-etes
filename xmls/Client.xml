@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Client name="pepe" surname="feo">
+    <phone>564</phone>
+    <money>0.0</money>
+    <condition>false</condition>
+</Client>

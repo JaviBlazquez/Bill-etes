@@ -65,8 +65,7 @@ public class JDBCMatch {
 
 	public void updateMatch(Match m) {
 		try {
-			String sql = "UPDATE matchs SET client_id, table_id, timeStamp = {?,?,?}"
-					+ "WHERE matchs.match_id = {?}";
+			String sql = "UPDATE matchs SET client_id = ?, table_id = ?, fecha = ? WHERE matchs.match_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, m.getClientId());
 			prep.setInt(2, m.getTableId());

@@ -44,8 +44,7 @@ public class JDBCMachine implements MachineManager{
 	@Override
 	public void updateMachine(Machine M) {
 		try {
-			String sql = "UPDATE machine SET name,money_won = {?,?}"
-					+ "WHERE machine.machine_id = {?}";
+			String sql = "UPDATE machine SET name = ?,money_won = ? WHERE machine.machine_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, M.getMachineName());
 			prep.setFloat(2, M.getMoneyWon());

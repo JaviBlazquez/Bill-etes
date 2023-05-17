@@ -1,5 +1,6 @@
 package CasinoUI;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Timestamp;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import Interfaces.*;
+import xml.*;
 import JPA.JPAUserManager;
 import POJOS.*;
 import jdbc.*;
@@ -21,6 +23,8 @@ public class Menu {
 	private static BufferedReader readers = new BufferedReader (new InputStreamReader(System.in));
 	private static JDBCManager jdbcManager= new JDBCManager();
 	private static JPAUserManager userManager= new JPAUserManager();
+	private static XMLClientManager xmlclientmanager = new XMLClientManagerImpl();
+	private static XMLCasinoManager xmlcasinomanager = new XMLCasinoManagerImpl();
 	
 	private static void login() throws IOException {
 		System.out.println("Introduce your email");
@@ -258,7 +262,8 @@ public class Menu {
 			System.out.println("Choose an option");
 			System.out.println("0. Return to login page");
 			System.out.println("1. Check database info");
-			System.out.println("2. Modify database info");
+			System.out.println("2. Print casino data");
+			System.out.println("3. Modify database info");
 			int choice = Integer.parseInt(readers.readLine());
 			switch(choice)
 			{
@@ -346,14 +351,23 @@ public class Menu {
 				}
 				break;
 			case 2:
+				JDBCCasino jdbccasino = new JDBCCasino(jdbcManager);
+				JDBCWorker jdbcworkers= new JDBCWorker(jdbcManager);
+				List<Worker> workersList= jdbcworkers.getListOfWorkers();
+				Casino c = jdbccasino.getCasino();
+				c.setWorkers(workersList);
+				printMe(c);
+				break;
+			case 3:
 				bucle3=true;
 				while(bucle3) {
 					System.out.println("Choose an option");
 					System.out.println("0. Return to previus page");
 					System.out.println("1. Client's state");
-					System.out.println("2. Bancary account");
-					System.out.println("3. Worker");
-					System.out.println("4. Create shift");
+					System.out.println("2. Load a client");
+					System.out.println("3. Bancary account");
+					System.out.println("4. Worker");
+					System.out.println("5. Create shift");
 					choice= Integer.parseInt(readers.readLine());
 					switch(choice) {
 						case 0: 
@@ -375,6 +389,9 @@ public class Menu {
 							jdbcClient.updateClient(client);
 							break;
 						case 2:
+							loadClient();
+							break;
+						case 3:
 							float money;
 							System.out.println("Introduce the new ammount of money");
 							money = Float.parseFloat(readers.readLine());
@@ -383,7 +400,7 @@ public class Menu {
 							bancaryAccount.setMoney(money);
 							jdbcBancaryAccount.updateBancaryAccount(bancaryAccount);
 							break;
-						case 3:
+						case 4:
 							boolean bucle4= true;
 							while(bucle4) {
 								JDBCWorker jdbcWorker= new JDBCWorker(jdbcManager);
@@ -435,7 +452,7 @@ public class Menu {
 									}
 							}
 							break;
-						case 4:
+						case 5:
 							JDBCShift jdbcShift= new JDBCShift(jdbcManager);
 							System.out.println("Introduce workerId");
 							Integer workerId= Integer.parseInt(readers.readLine());
@@ -461,6 +478,20 @@ public class Menu {
 		}
 		
 	}
+	
+	private static void loadClient() {
+		Client c = null;
+		File file = new File("./xmls/External-Client.xml");
+		xmlclientmanager.xmlToClient(file);
+	}
+	
+	private static void printMe(Casino cas) {
+		xmlcasinomanager.casinoToXml(cas);
+		System.out.println("Casino xml created");
+			
+		}
+	
+	
 	private static void securityMenu(User u) throws NumberFormatException, IOException {
 		boolean bucle1 = true;
 		while(bucle1) {
@@ -529,7 +560,8 @@ public class Menu {
 			System.out.println("Choose an option");
 			System.out.println("0. Return to menu");
 			System.out.println("1. Administrate account");
-			System.out.println("2. View game record");
+			System.out.println("2. Print my data");
+			System.out.println("3. View game record");
 			int choice = Integer.parseInt(readers.readLine());
 			switch(choice) {
 			case 0:
@@ -588,6 +620,17 @@ public class Menu {
 					}
 					}break;
 			case 2:
+				JDBCClient jdbcclient = new JDBCClient(jdbcManager);
+				List<Client> client = jdbcclient.getListofClient();
+				Iterator<Client> itclient = client.iterator();
+				while(itclient.hasNext()) {
+					Client c = itclient.next();
+					if(c.getClientId() == u.getId()) {
+						printMe(c);
+					}
+				}
+				break;
+			case 3:
 				bucle2=true;
 				while(bucle2) {
 					System.out.println("Choose an option");
@@ -630,6 +673,12 @@ public class Menu {
 		}
 		
 	}
+	
+	private static void printMe(Client c) {
+		xmlclientmanager.clientToXml(c);
+		System.out.println("Client printed");
+	}
+	
 	public static void main(String[] args) {
 		try {
 			do {

@@ -65,8 +65,7 @@ public class JDBCGame implements GameManager{
 	@Override
 	public void updateGame(Game g) {
 		try {
-			String sql = "UPDATE game SET client_id, machine_id, fecha = {?,?,?}"
-					+ "WHERE game.game_id = {?}";
+			String sql = "UPDATE game SET client_id = ?, machine_id = ?, fecha = ? WHERE game.game_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, g.getClientId());
 			prep.setInt(2, g.getMachineId());

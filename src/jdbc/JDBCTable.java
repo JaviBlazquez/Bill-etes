@@ -38,8 +38,7 @@ public class JDBCTable implements TableManager{
 	@Override
 	public void updateTable(Table T) {
 		try {
-			String sql = "UPDATE casinotable SET game_name,money_won = {?,?}"
-					+ "WHERE casinotable.table_id = {?}";
+			String sql = "UPDATE casinotable SET game_name = ?, money_won = ? WHERE casinotable.table_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, T.getGameName());
 			prep.setFloat(2, T.getMoneyWon());
