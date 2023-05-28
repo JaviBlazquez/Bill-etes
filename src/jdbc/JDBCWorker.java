@@ -92,7 +92,7 @@ public class JDBCWorker implements WorkerManager{
 	
 	public void updateWorker(Worker w, int id) {
 		try {
-			String sql = "UPDATE worker SET name = ?, surname = ?, salary = ?, address = ?, occupation = ? WHERE worker.worker_id = ?";
+			String sql = "UPDATE worker SET name = ?, surname = ?, salary = ?, address = ?, occupation = ?, worker_id=? WHERE worker_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, w.getName());
 			prep.setString(2, w.getSurname());
@@ -114,6 +114,7 @@ public class JDBCWorker implements WorkerManager{
 			String sql = "DELETE FROM worker WHERE worker.worker_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, w.getWorkerId());
+			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

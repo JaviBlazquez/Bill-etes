@@ -178,12 +178,12 @@ public class Menu {
 				Iterator<Worker> itW= workers.iterator();
 				while(itW.hasNext()) {
 					Worker worker= itW.next();
+					if(u.getId()==worker.getWorkerId()) {
+						jdbcWorker.removeWorker(worker);
+					}
 					if(u.getId()<worker.getWorkerId()) {
 						worker.setWorkerId(worker.getWorkerId()-1);
 						jdbcWorker.updateWorker(worker, worker.getWorkerId()+1);
-					}
-					if(u.getId()==worker.getWorkerId()) {
-						jdbcWorker.removeWorker(worker);
 					}
 				}
 				List<User> usersW=userManager.getRole("croupier").getUsers();
@@ -444,15 +444,21 @@ public class Menu {
 									case 3:
 										System.out.println("Introduce workerId");
 										Integer workerId2= Integer.parseInt(readers.readLine());
+										boolean state=false;
 										while(itW.hasNext()) {
 											Worker worker= itW.next();
 											List<User> users= userManager.getRole(worker.getOccupationString()).getUsers();
 											Iterator<User> itU= users.iterator();
 											while(itU.hasNext()) {
 												User uW= itU.next();
-												if(worker.getWorkerId()==uW.getId()) {
+												if(workerId2==uW.getId()) {
 													removeUser(uW);
+													state=true;
+													break;
 												}
+											}
+											if(state) {
+												break;
 											}
 										}
 										
