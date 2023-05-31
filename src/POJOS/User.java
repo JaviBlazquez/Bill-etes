@@ -25,8 +25,8 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue( generator = "users")
 	@TableGenerator (name = "users" , table = "sqlite_sequence", pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "users" )
-	private Integer id;
 	private String email;
+	private Integer id;
 	@Lob
 	private String password;
 	@ManyToOne

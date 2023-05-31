@@ -80,6 +80,15 @@ public class Menu {
 		phone = Integer.parseInt(readers.readLine());
 		jdbcclient.addClient(new Client(clientId, phone, 0, name, surname, false));
 	}
+	private static void registerClient(Client c) throws IOException {
+		JDBCClient jdbcclient= new JDBCClient(jdbcManager);
+		Integer clientId= (Integer) userManager.getRole("client").getUsers().size();
+		Role role= userManager.getRole("client");
+		User user= new User(clientId,c.getName()+"@.com", ""+c.getPhone(),role);
+		userManager.newUser(user);
+		role.addUSer(user);
+		jdbcclient.addClient(new Client(clientId, c.getPhone(), c.getMoney(), c.getName(), c.getSurname(), c.isCondition()));
+	}
 	private static void registerWorker() throws IOException {
 		String email, role_string, name, surname, address;
 		int salary;
@@ -144,12 +153,12 @@ public class Menu {
 				Iterator<Client> itC= clients.iterator();
 				while(itC.hasNext()) {
 					Client client= itC.next();
+					if(u.getId()==client.getClientId()) {
+						jdbcClient.removeClient(client);
+					}
 					if(u.getId()<client.getClientId()) {
 						client.setClientId(client.getClientId()-1);
 						jdbcClient.updateClient(client, client.getClientId()+1);
-					}
-					if(u.getId()==client.getClientId()) {
-						jdbcClient.removeClient(client);
 					}
 				}
 				List<User> usersC=u.getRole().getUsers();
@@ -169,12 +178,12 @@ public class Menu {
 				Iterator<Worker> itW= workers.iterator();
 				while(itW.hasNext()) {
 					Worker worker= itW.next();
+					if(u.getId()==worker.getWorkerId()) {
+						jdbcWorker.removeWorker(worker);
+					}
 					if(u.getId()<worker.getWorkerId()) {
 						worker.setWorkerId(worker.getWorkerId()-1);
 						jdbcWorker.updateWorker(worker, worker.getWorkerId()+1);
-					}
-					if(u.getId()==worker.getWorkerId()) {
-						jdbcWorker.removeWorker(worker);
 					}
 				}
 				List<User> usersW=userManager.getRole("croupier").getUsers();
@@ -435,15 +444,21 @@ public class Menu {
 									case 3:
 										System.out.println("Introduce workerId");
 										Integer workerId2= Integer.parseInt(readers.readLine());
+										boolean state=false;
 										while(itW.hasNext()) {
 											Worker worker= itW.next();
 											List<User> users= userManager.getRole(worker.getOccupationString()).getUsers();
 											Iterator<User> itU= users.iterator();
 											while(itU.hasNext()) {
 												User uW= itU.next();
-												if(worker.getWorkerId()==uW.getId()) {
+												if(workerId2==uW.getId()) {
 													removeUser(uW);
+													state=true;
+													break;
 												}
+											}
+											if(state) {
+												break;
 											}
 										}
 										
@@ -479,12 +494,16 @@ public class Menu {
 		
 	}
 	
-	private static void loadClient() {
-		Client c = null;
+	private static void loadClient() throws IOException {
 		File file = new File("./xmls/External-Client.xml");
+<<<<<<< HEAD
 		c = xmlclientmanager.xmlToClient(file);
 		
 		System.out.println(c);
+=======
+		Client c= xmlclientmanager.xmlToClient(file);
+		registerClient(c);
+>>>>>>> branch 'master' of https://github.com/JaviBlazquez/Bill-etes.git
 	}
 	
 	private static void printMe(Casino cas) {

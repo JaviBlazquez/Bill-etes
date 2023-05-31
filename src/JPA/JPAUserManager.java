@@ -126,7 +126,9 @@ private EntityManager em;
 
 	@Override
 	public void removeUser(User u) {
+			em.getTransaction().begin();
 			em.remove(u);
+			em.getTransaction().commit();
 	}
 	
 

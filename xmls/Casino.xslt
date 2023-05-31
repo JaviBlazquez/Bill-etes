@@ -6,22 +6,23 @@
 	
 	<p><b>Casino:</b></p>
 	<p> Name: <xsl:value-of select="Casino/@name" /> </p>
-	<p> Email:   <xsl:value-of select="email" /> </p>
-	<p> Phone: <xsl:value-of select="phone" /></p>
+	<p> Workers:   <xsl:value-of select="Casino/workers" /> </p>
 	
 	<table border="1">
-	  <th>Dog's name</th>
-      <th>Breed</th>
-      <th>Coat</th>
-      <th>Date of Birth</th>
+	  <th>Name</th>
+      <th>Surname</th>
+      <th>Salary</th>
+      <th>Addres</th>
+      <th>Occupation</th>
       
-      <xsl:for-each select="Owner/Dogs/dog">
+      <xsl:for-each select="Casino/Workers/worker">
       <xsl:sort select="@name" />
 	       <tr>
 	            <td><xsl:value-of select="@name" /></td>
-	            <td><xsl:value-of select="breed" /></td>
-	            <td><xsl:value-of select="coat" /></td>
-	            <td><xsl:value-of select="dob" /></td>            
+	            <td><xsl:value-of select="@surname" /></td>
+	            <td><xsl:value-of select="salary" /></td>
+	            <td><xsl:value-of select="addres" /></td>
+	            <td><xsl:value-of select="occupation" /></td>            
 	       </tr>        
       </xsl:for-each>  
 		
