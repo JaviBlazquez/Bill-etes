@@ -54,6 +54,7 @@ public class JDBCGame implements GameManager{
 			String sql = "DELETE FROM game WHERE game.game_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, g.getMachineId());
+			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
