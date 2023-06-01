@@ -54,6 +54,7 @@ public class JDBCMatch {
 			String sql = "DELETE FROM matchs WHERE table.table_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, m.getTableId());
+			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

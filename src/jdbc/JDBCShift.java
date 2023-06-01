@@ -72,6 +72,7 @@ public void removeShift(Shift s) {
 		String sql = "DELETE FROM shift WHERE shift.croupier_id = ?";
 		PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 		prep.setInt(1, s.getCroupierId());
+		prep.executeUpdate();
 	}catch(Exception e) {
 		e.printStackTrace();
 	}

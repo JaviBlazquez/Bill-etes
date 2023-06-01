@@ -30,6 +30,7 @@ public class JDBCCasino implements CasinoManager{
 			String sql = "DELETE FROM casino WHERE casino.casino_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1,C.getCasinoId());
+			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -35,6 +35,7 @@ public class JDBCMachine implements MachineManager{
 			String sql = "DELETE FROM machine WHERE machine.machine_id = ?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, M.getMachineId());
+			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
