@@ -515,11 +515,10 @@ public class Menu {
 		while(bucle1) {
 			System.out.println("Choose an option");
 			System.out.println("0. Return to login page");
-			System.out.println("1. Access a client info");
+			System.out.println("1. Delete client from database");
 			System.out.println("2. Check salary");
 			System.out.println("3. Check worker list");
 			System.out.println("4. Check shifts");
-			//System.out.println("2. Ban a client from the database");
 			int choice = Integer.parseInt(readers.readLine());
 			JDBCWorker jdbcWorker= new JDBCWorker(jdbcManager);
 			List<Worker> workers= jdbcWorker.getListOfWorkers();
