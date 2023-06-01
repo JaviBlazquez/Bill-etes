@@ -4,11 +4,16 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import Exceptions.MoneyException;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 
 import Interfaces.*;
@@ -26,7 +31,7 @@ public class Menu {
 	private static XMLClientManager xmlclientmanager = new XMLClientManagerImpl();
 	private static XMLCasinoManager xmlcasinomanager = new XMLCasinoManagerImpl();
 	
-	private static void login() throws IOException {
+	private static void login() throws IOException, NumberFormatException, ParseException {
 		System.out.println("Introduce your email");
 		String email = readers.readLine();
 		System.out.println("Introduce your password");
@@ -116,11 +121,11 @@ public class Menu {
 		salary = Integer.parseInt(readers.readLine());
 		System.out.println("Introduce the worker's address");
 		address = readers.readLine();
-		switch(role.getName()) {
-			case "Security":{
+		switch(role_string) {
+			case "security":{
 				occupation= Occupation.SECURITY;
 			}
-			case "Croupier":{
+			case "croupier":{
 				occupation= Occupation.CROUPIER;
 			}
 			default:{
@@ -206,7 +211,7 @@ public class Menu {
 			System.out.println("Choose an option");
 			System.out.println("0. Return to login page");
 			System.out.println("1. Check salary");
-			System.out.println("2. Check client's state");
+			System.out.println("2. Delete client account");
 			System.out.println("3. Check worker list");
 			System.out.println("4. Check shifts");
 			int choice = Integer.parseInt(readers.readLine());
@@ -263,7 +268,7 @@ public class Menu {
 		}
 		
 	}
-	private static void administrationMenu(User u) throws NumberFormatException, IOException {
+	private static void administrationMenu(User u) throws NumberFormatException, IOException, ParseException {
 		boolean bucle1=true;
 		boolean bucle2=false;
 		boolean bucle3=false;
@@ -473,16 +478,14 @@ public class Menu {
 							Integer workerId= Integer.parseInt(readers.readLine());
 							System.out.println("Introduce tableId");
 							Integer tableId= Integer.parseInt(readers.readLine());
-							Timestamp timestamp;
 							System.out.println("Introduce month");
 							int month= Integer.parseInt(readers.readLine());
 							System.out.println("Introduce day");
 							int day= Integer.parseInt(readers.readLine());
-							System.out.println("Introduce hour");
-							int hour= Integer.parseInt(readers.readLine());
-							System.out.println("Introduce minute");
-							int minute= Integer.parseInt(readers.readLine());
-							jdbcShift.addShift(new Shift(tableId,workerId, new Timestamp(2023,month,day,hour,minute,0,0)));
+							DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+							Date date = dateFormat.parse(day+"/"+month+"/2023");
+							long time = date.getTime();
+							jdbcShift.addShift(new Shift(tableId,workerId,new Timestamp(time)));
 							break;
 					}
 				}
@@ -496,14 +499,8 @@ public class Menu {
 	
 	private static void loadClient() throws IOException {
 		File file = new File("./xmls/External-Client.xml");
-<<<<<<< HEAD
-		c = xmlclientmanager.xmlToClient(file);
-		
-		System.out.println(c);
-=======
 		Client c= xmlclientmanager.xmlToClient(file);
 		registerClient(c);
->>>>>>> branch 'master' of https://github.com/JaviBlazquez/Bill-etes.git
 	}
 	
 	private static void printMe(Casino cas) {
@@ -518,11 +515,10 @@ public class Menu {
 		while(bucle1) {
 			System.out.println("Choose an option");
 			System.out.println("0. Return to login page");
-			System.out.println("1. Access a client info");
+			System.out.println("1. Delete client from database");
 			System.out.println("2. Check salary");
 			System.out.println("3. Check worker list");
 			System.out.println("4. Check shifts");
-			//System.out.println("2. Ban a client from the database");
 			int choice = Integer.parseInt(readers.readLine());
 			JDBCWorker jdbcWorker= new JDBCWorker(jdbcManager);
 			List<Worker> workers= jdbcWorker.getListOfWorkers();
